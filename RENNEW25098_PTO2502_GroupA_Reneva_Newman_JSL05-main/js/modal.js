@@ -53,6 +53,28 @@ export function setupAddTaskModal() {
     const submitBtn = document.getElementById("submit-task-btn");
     if (submitBtn) submitBtn.textContent = "Create Task";
 
+      const deleteBtn = document.getElementById("delete-task-btn");
+
+  // Hide delete button for new tasks
+  deleteBtn.style.display = currentTaskId ? "block" : "none";
+
+  deleteBtn.addEventListener("click", () => {
+    if (!currentTaskId) return;
+
+    const confirmDelete = confirm("Are you sure you want to delete this task?");
+    if (!confirmDelete) return;
+
+    let tasks = loadTasks();
+    tasks = tasks.filter((task) => task.id !== currentTaskId);
+    saveTasks(tasks);
+
+    document.getElementById("task-modal").close();
+    clearExistingTasks();
+    renderTasks(loadTasks());
+    currentTaskId = null;
+  });
+
+
     document.getElementById("task-modal").showModal();
   });
 
