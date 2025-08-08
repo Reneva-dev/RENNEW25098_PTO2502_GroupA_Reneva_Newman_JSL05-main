@@ -15,13 +15,17 @@ export function openTaskModal(task) {
   const descInput = document.getElementById("task-desc");
   const statusSelect = document.getElementById("task-status");
   const submitBtn = document.getElementById("submit-task-btn");
-
-  titleInput.value = task.title;
+  const deleteBtn = document.getElementById("delete-task-btn");
+ 
+titleInput.value = task.title;
   descInput.value = task.description;
   statusSelect.value = task.status;
   if (submitBtn) submitBtn.textContent = "Update Task";
 
   currentTaskId = task.id;
+
+  // ✅ Show the delete button when editing a task
+  if (deleteBtn) deleteBtn.style.display = "block";
 
   modal.showModal();
 }
@@ -73,7 +77,6 @@ export function setupAddTaskModal() {
     renderTasks(loadTasks());
     currentTaskId = null;
   });
-
 
     document.getElementById("task-modal").showModal();
   });
