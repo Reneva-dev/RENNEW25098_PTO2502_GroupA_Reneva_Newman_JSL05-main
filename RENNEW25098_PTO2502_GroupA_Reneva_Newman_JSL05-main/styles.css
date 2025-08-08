@@ -490,3 +490,11 @@ button:hover {
 .submit-task-btn:hover {
   background-color: #4e4ab8;
 }
+
+.status-message {
+  display: none;
+  text-align: center;
+  margin: 1rem 0;
+  color: red;
+}
+
