@@ -551,4 +551,12 @@ dialog#task-modal {
   }
 }
 
+@media (max-width: 768px) {
+  .card-column-main {
+    display: flex;
+    flex-direction: column; /* stack vertically */
+    gap: 16px; /* spacing between columns */
+  }
+}
+
 
