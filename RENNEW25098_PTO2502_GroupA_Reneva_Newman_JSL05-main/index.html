@@ -16,8 +16,8 @@
     />
     <script type="module" src="./main.js" defer></script>
 
-<title>Kanban Task Management</title>
-</head>
+    <title>Kanban Task Management</title>
+  </head>
 
   <body>
     <!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
@@ -30,14 +30,16 @@
         <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
         <button class="board-btn">Launch Career</button>
       </div>
-      <div id="theme-toggle-container" style="width: 90%; margin: 0 auto 12px auto;">
-  <label class="theme-switch">
-    <span class="sun">☀️</span>
-    <input type="checkbox" id="theme-toggle-checkbox" />
-    <span class="slider"></span>
-    <span class="moon">🌑</span>
-  </label>
-</div>
+
+      <!-- Theme toggle container -->
+      <div id="theme-toggle-container">
+        <label class="theme-switch">
+          <span class="sun">☀️</span>
+          <input type="checkbox" id="theme-toggle-checkbox" />
+          <span class="slider"></span>
+          <span class="moon">🌑</span>
+        </label>
+      </div>
 
       <button id="hide-sidebar-btn" class="hide-sidebar-btn">Hide Sidebar</button>
     </nav>
@@ -51,14 +53,13 @@
             alt="logo-mobile"
             class="logo-mobile"
           />
-         <h2 class="header-board-name launch-career" id="header-board-name">
-      Launch Career
-         </h2>
-
+          <h2 class="header-board-name launch-career" id="header-board-name">
+            Launch Career
+          </h2>
         </div>
         <button id="add-task-btn" class="add-task-btn">
           <span>+ Add New Task</span>
-          </button>
+        </button>
       </header>
 
       <div class="container">
@@ -95,46 +96,55 @@
         </main>
       </div>
     </div>
+
     <dialog id="task-modal">
-  <form method="dialog" id="task-form">
-    <div class="modal-header">
-      <h3>Add New Task</h3>
-      <button type="button" class="close-btn" id="close-modal-btn">
-        &times;
-      </button>
-    </div>
+      <form method="dialog" id="task-form">
+        <div class="modal-header">
+          <h3>Add New Task</h3>
+          <button type="button" class="close-btn" id="close-modal-btn">
+            &times;
+          </button>
+        </div>
 
-    <label for="task-title">Title</label>
-    <input type="text" id="task-title" name="title" required placeholder="e.g. Take a chilled break" />
+        <label for="task-title">Title</label>
+        <input
+          type="text"
+          id="task-title"
+          name="title"
+          required
+          placeholder="e.g. Take a chilled break"
+        />
 
-    <label for="task-desc">Description</label>
-    <textarea id="task-desc" name="description" rows="4"
-      placeholder="e.g. Pet your dog, have a cup of coffee, dance to your favourite song and come back to crush this challenge."></textarea>
+        <label for="task-desc">Description</label>
+        <textarea
+          id="task-desc"
+          name="description"
+          rows="4"
+          placeholder="e.g. Pet your dog, have a cup of coffee, dance to your favourite song and come back to crush this challenge."
+        ></textarea>
 
-    <label for="task-status">Status</label>
-    <select id="task-status" name="status" required>
-      <option value="todo">todo</option>
-      <option value="doing">doing</option>
-      <option value="done">done</option>
-    </select>
+        <label for="task-status">Status</label>
+        <select id="task-status" name="status" required>
+          <option value="todo">todo</option>
+          <option value="doing">doing</option>
+          <option value="done">done</option>
+        </select>
 
-    <!-- Submit button -->
-    <button type="submit" id="submit-task-btn" class="submit-task-btn">
-      Create Task
+        <!-- Submit button -->
+        <button type="submit" id="submit-task-btn" class="submit-task-btn">
+          Create Task
+        </button>
+
+        <!-- Delete button (only shown in edit mode) -->
+        <button type="button" id="delete-task-btn" class="delete-task-btn">
+          Delete Task
+        </button>
+      </form>
+    </dialog>
+
+    <!-- Googly Eyes Tab (initially hidden) -->
+    <button id="show-sidebar-btn" class="show-sidebar-btn" style="display: none;">
+      👀
     </button>
-
-    <!-- Delete button (only shown in edit mode) -->
-    <button type="button" id="delete-task-btn" class="delete-task-btn">
-      Delete Task
-    </button>
-  </form>
-</dialog>
-
-<!-- Googly Eyes Tab (initially hidden) -->
-<button id="show-sidebar-btn" class="show-sidebar-btn" style="display: none;">
-  👀
-</button>
-
   </body>
 </html>
-
