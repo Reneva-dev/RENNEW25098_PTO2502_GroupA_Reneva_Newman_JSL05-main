@@ -567,3 +567,74 @@ button:hover {
   display: none; /* hidden initially */
 }
 
+/* Container aligns toggle above hide button with same width */
+#theme-toggle-container {
+  width: 90%;
+  margin: 0 auto 12px auto;
+}
+
+/* The toggle switch label */
+.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48px;
+  background-color: var(--secondary-color); /* #F4F7FD light bg */
+  border-radius: 4px;
+  padding: 0 12px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Sun and Moon icons styling */
+.theme-switch .sun,
+.theme-switch .moon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Hide the native checkbox */
+.theme-switch input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* The slider track */
+.theme-switch .slider {
+  position: relative;
+  flex-grow: 1;
+  height: 24px;
+  background-color: #635FC7; /* default light mode bg */
+  border-radius: 12px;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
+}
+
+/* The circle knob */
+.theme-switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  left: 0;
+  top: 0;
+  background-color: white; /* white knob for light mode */
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Checked (dark mode) styles */
+.theme-switch input:checked + .slider {
+  background-color: #ffffff; /* slider track changes to white in dark mode */
+}
+
+.theme-switch input:checked + .slider::before {
+  background-color: #635FC7; /* knob changes to purple in dark mode */
+  transform: translateX(100%);
+}
+
