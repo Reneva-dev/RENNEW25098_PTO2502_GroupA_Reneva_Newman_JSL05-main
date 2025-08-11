@@ -501,24 +501,23 @@ button:hover {
 .side-bar {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* full viewport height */
-  /* your other sidebar styles */
+  height: 100vh; /* full height */
+  transition: transform 0.3s ease; /* for smooth toggle animation */
 }
 
 #hide-sidebar-btn {
+  margin-top: auto; /* always push button to bottom */
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #F4F7FD;
-  color: #333; /* dark text for contrast */
   border: none;
   padding: 12px;
   font-size: 1rem;
   cursor: pointer;
-  width: 90%;            /* button takes most of sidebar width */
-  margin: 0 auto 20px auto; /* center horizontally, bottom margin */
-  align-self: center;    /* center in flex container */
-  border-radius: 4px;    /* optional rounded corners */
-  margin-top: auto;      /* push button to bottom */
-  flex-shrink: 0;        /* prevent shrinking */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow */
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 
