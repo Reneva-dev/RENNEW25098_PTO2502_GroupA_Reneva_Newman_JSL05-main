@@ -89,4 +89,17 @@ themeToggleCheckbox.addEventListener("change", () => {
   }
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const logoMobile = document.querySelector('.logo-mobile');
+  const sideBar = document.querySelector('.side-bar');
+
+  logoMobile.addEventListener('click', () => {
+    if (sideBar.classList.contains('hide')) {
+      sideBar.classList.remove('hide');
+    } else {
+      sideBar.classList.add('hide');
+    }
+  });
+});
+
 
