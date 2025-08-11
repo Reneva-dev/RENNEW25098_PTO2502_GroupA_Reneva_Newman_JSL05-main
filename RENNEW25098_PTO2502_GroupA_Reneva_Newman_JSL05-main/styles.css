@@ -638,3 +638,32 @@ button:hover {
   transform: translateX(100%);
 }
 
+body.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-theme .side-bar {
+  background-color: #1E1E1E;
+  border-right: 1px solid #333;
+}
+
+body.dark-theme header {
+  background-color: #1E1E1E;
+  border-bottom: 1px solid #333;
+  color: #e0e0e0;
+}
+
+body.dark-theme .board-btn {
+  background-color: #4B3B9C;
+  color: #ddd;
+}
+
+body.dark-theme .task-div {
+  background-color: #2A2A2A;
+  color: #eee;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.6);
+}
+
+/* Add more dark mode styles to match Figma */
+
