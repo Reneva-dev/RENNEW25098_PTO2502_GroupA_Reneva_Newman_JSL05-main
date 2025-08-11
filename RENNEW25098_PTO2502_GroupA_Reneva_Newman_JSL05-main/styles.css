@@ -623,5 +623,44 @@ dialog#task-modal {
   }
 }
 
+.side-bar {
+  /* Default desktop styles */
+  position: static;  /* or whatever your desktop style is */
+  width: 280px;
+  height: 100vh;
+  background-color: var(--sidebar-bg, #fff);
+  box-shadow: none; /* or your desktop shadow */
+  transform: none; /* reset transform */
+  transition: none;
+  overflow-y: auto;
+  z-index: auto;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .side-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    background-color: var(--sidebar-bg, #fff);
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+  }
+
+  .side-bar.mobile-active {
+    transform: translateX(0);
+  }
+
+  /* Hide desktop sidebar controls on mobile */
+  #hide-sidebar-btn, #show-sidebar-btn {
+    display: none;
+  }
+}
+
 
 
