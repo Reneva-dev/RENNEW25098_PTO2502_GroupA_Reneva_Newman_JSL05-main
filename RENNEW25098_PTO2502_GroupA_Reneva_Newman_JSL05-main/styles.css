@@ -498,15 +498,30 @@ button:hover {
   color: red;
 }
 
+/* Sidebar base */
 .side-bar {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* full height */
-  transition: transform 0.3s ease; /* for smooth toggle animation */
+  height: 100vh;
+  width: var(--sidebar-width);
+  background-color: var(--primary-color);
+  border-right: 1px solid #e4ebfa;
+  transition: transform 0.3s ease;
+  position: fixed; /* fix sidebar so it doesn't move with page */
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transform: translateX(0); /* shown by default */
 }
 
+/* Sidebar hidden */
+.side-bar.hide {
+  transform: translateX(-100%);
+}
+
+/* Hide Sidebar button pinned to bottom */
 #hide-sidebar-btn {
-  margin-top: auto; /* always push button to bottom */
+  margin-top: auto;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -520,8 +535,7 @@ button:hover {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-
-/* The googly eyes tab */
+/* Show Sidebar button (googly button) fixed at bottom left */
 .show-sidebar-btn {
   position: fixed;
   bottom: 20px;
@@ -535,4 +549,5 @@ button:hover {
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   user-select: none;
   z-index: 1000;
+  display: none; /* hidden by default */
 }
