@@ -515,4 +515,26 @@ dialog#task-modal {
   cursor: pointer;    /* changes cursor on hover */
 }
 
+#task-form label {
+  display: block;             /* Label takes full width, so it appears above */
+  font-weight: 600;
+  margin-bottom: 8px;         /* Space below label */
+  color: var(--text-color);   /* or your preferred color */
+}
+
+#task-form input,
+#task-form textarea,
+#task-form select {
+  width: 100%;                /* Full width inputs */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;        /* Space below each input */
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-color);
+  background-color: var(--bg-input, #fff);
+  box-sizing: border-box;
+}
+
 
