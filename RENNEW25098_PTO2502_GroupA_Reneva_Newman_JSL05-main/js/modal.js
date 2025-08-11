@@ -1,6 +1,6 @@
 // modal.js
 
-import { loadTasks, saveTasks } from "./storage.js";
+import { loadTasks, saveTasks, deleteTask } from "./storage.js";
 import { clearExistingTasks, renderTasks } from "./render.js";
 
 let currentTaskId = null;
