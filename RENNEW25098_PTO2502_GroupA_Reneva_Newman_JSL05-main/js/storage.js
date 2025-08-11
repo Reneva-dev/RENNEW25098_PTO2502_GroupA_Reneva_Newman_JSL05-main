@@ -25,3 +25,9 @@ export function loadTasks() {
 export function saveTasks(tasks) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
+
+export function deleteTask(taskId) {
+  let tasks = loadTasks();
+  tasks = tasks.filter(t => t.id !== taskId);
+  saveTasks(tasks);
+}
