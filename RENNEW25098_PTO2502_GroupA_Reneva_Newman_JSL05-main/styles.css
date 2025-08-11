@@ -436,14 +436,21 @@ dialog#task-modal {
 }
 
 /* Form elements */
+/* Make labels on top and inputs stacked vertically inside modal */
+#task-form {
+  display: flex;
+  flex-direction: column;  /* stack vertically */
+  gap: 16px;               /* space between fields */
+}
+
 #task-form label {
-  display: block;
-  margin-bottom: 8px;
+  display: block;           /* labels full width on top */
   font-weight: 700;
   font-size: 0.75rem;
   color: var(--secondary-font-color, #828fa3);
   letter-spacing: 2px;
   text-transform: uppercase;
+  margin-bottom: 8px;       /* space below label */
 }
 
 #task-form input[type="text"],
@@ -455,12 +462,14 @@ dialog#task-modal {
   border-radius: 4px;
   font-family: inherit;
   font-size: 1rem;
-  margin-bottom: 24px;
   color: var(--primary-font-color, #000);
   background-color: var(--secondary-color, #f4f7fd);
   resize: none;
+  box-sizing: border-box;
+  margin-bottom: 0; /* remove extra margin because gap in container */
 }
 
+/* Placeholder color */
 #task-form input::placeholder,
 #task-form textarea::placeholder {
   color: #828fa3;
@@ -499,42 +508,27 @@ dialog#task-modal {
 }
 
 /* Align buttons container */
-#task-form {
+#task-form-buttons {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
 }
 
+/* Add New Task button */
 #add-task-btn {
-  background-color: #635FC7;
-  color: white;
-  padding: 12px 24px; /* makes button bigger */
-  font-size: 16px;    /* increase font size */
-  border: none;       /* removes any border */
-  border-radius: 6px; /* optional: rounded corners */
-  cursor: pointer;    /* changes cursor on hover */
+  background-color: #635FC7; /* purple background */
+  color: white;              /* white text */
+  padding: 14px 28px;        /* bigger padding */
+  font-size: 16px;           /* bigger font */
+  border: none;              /* no border */
+  border-radius: 6px;        /* rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-#task-form label {
-  display: block;             /* Label takes full width, so it appears above */
-  font-weight: 600;
-  margin-bottom: 8px;         /* Space below label */
-  color: var(--text-color);   /* or your preferred color */
-}
-
-#task-form input,
-#task-form textarea,
-#task-form select {
-  width: 100%;                /* Full width inputs */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 20px;        /* Space below each input */
-  font-size: 1rem;
-  font-family: inherit;
-  color: var(--text-color);
-  background-color: var(--bg-input, #fff);
-  box-sizing: border-box;
+#add-task-btn:hover {
+  background-color: #7c72e8;
 }
 
 
