@@ -61,4 +61,32 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
+
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.body.classList.add("dark-theme");
+    themeToggleCheckbox.checked = true;
+  } else {
+    document.body.classList.remove("dark-theme");
+    themeToggleCheckbox.checked = false;
+  }
+  localStorage.setItem("theme", theme);
+}
+
+// On page load, apply saved theme or default to light
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  applyTheme(savedTheme);
+});
+
+// Toggle handler
+themeToggleCheckbox.addEventListener("change", () => {
+  if (themeToggleCheckbox.checked) {
+    applyTheme("dark");
+  } else {
+    applyTheme("light");
+  }
+});
+
 
