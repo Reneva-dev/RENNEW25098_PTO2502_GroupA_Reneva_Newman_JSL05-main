@@ -505,3 +505,8 @@ dialog#task-modal {
   align-items: center;
 }
 
+#add-task-btn {
+  background-color: #635FC7;
+  color: white;
+}
+
