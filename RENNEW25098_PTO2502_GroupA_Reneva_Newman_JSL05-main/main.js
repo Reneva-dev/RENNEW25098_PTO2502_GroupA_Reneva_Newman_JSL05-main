@@ -106,9 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.querySelector(".side-bar");
   const mobileLogo = document.getElementById("mobile-logo-toggle");
 
-  mobileLogo.addEventListener("click", () => {
-    sidebar.classList.toggle("mobile-active");
-  });
+  if (mobileLogo && sidebar) {
+    mobileLogo.addEventListener("click", () => {
+      sidebar.classList.toggle("mobile-active");
+    });
+  }
 });
+
 
 
