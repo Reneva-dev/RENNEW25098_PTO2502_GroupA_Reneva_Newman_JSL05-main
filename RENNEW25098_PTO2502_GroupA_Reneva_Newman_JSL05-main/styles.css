@@ -498,12 +498,29 @@ button:hover {
   color: red;
 }
 
-/* Hide Sidebar button inside sidebar */
-.hide-sidebar-btn {
-  margin: 1rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* full viewport height */
+  /* your other sidebar styles */
 }
+
+#hide-sidebar-btn {
+  background-color: #F4F7FD;
+  color: #333; /* dark text for contrast */
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 90%;            /* button takes most of sidebar width */
+  margin: 0 auto 20px auto; /* center horizontally, bottom margin */
+  align-self: center;    /* center in flex container */
+  border-radius: 4px;    /* optional rounded corners */
+  margin-top: auto;      /* push button to bottom */
+  flex-shrink: 0;        /* prevent shrinking */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow */
+}
+
 
 /* The googly eyes tab */
 .show-sidebar-btn {
