@@ -30,6 +30,18 @@ titleInput.value = task.title;
   modal.showModal();
 }
 
+const deleteBtn = document.getElementById("delete-task-btn");
+if (deleteBtn) {
+  deleteBtn.onclick = () => {
+    deleteTask(currentTaskId);
+    modal.close();
+    clearExistingTasks();
+    renderTasks(loadTasks());
+    currentTaskId = null;
+  };
+}
+
+
 /**
  * Set up modal close event.
  */
