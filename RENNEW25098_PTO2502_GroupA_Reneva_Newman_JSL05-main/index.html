@@ -1,150 +1,150 @@
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet"
+  />
 
-    <link rel="stylesheet" href="./styles.css" />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/favicon.svg"
-    />
-    <script type="module" src="./main.js" defer></script>
+  <link rel="stylesheet" href="./styles.css" />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="./assets/favicon.svg"
+  />
+  <script type="module" src="./main.js" defer></script>
 
-    <title>Kanban Task Management</title>
-  </head>
+  <title>Kanban Task Management</title>
+</head>
 
-  <body>
-    <!-- Navigation Sidebar: Contains the logo, navigation links for boards, and theme toggle. -->
-    <nav class="side-bar" id="side-bar-div">
-      <div id="side-logo-div">
-        <img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
-      </div>
-
-      <div class="boards-nav-links-div" id="boards-nav-links-div">
-        <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
-        <button class="board-btn">Launch Career</button>
-      </div>
-
-      <!-- Theme toggle container -->
-      <div id="theme-toggle-container">
-        <label class="theme-switch">
-          <span class="sun">☀️</span>
-          <input type="checkbox" id="theme-toggle-checkbox" />
-          <span class="slider"></span>
-          <span class="moon">🌑</span>
-        </label>
-      </div>
-
-      <button id="hide-sidebar-btn" class="hide-sidebar-btn">Hide Sidebar</button>
-    </nav>
-
-    <!-- Main Layout: Header with board title, add task button, and main content area for task columns. -->
-    <div id="layout">
-      <header id="header" class="sticky-header">
-        <div class="header-name-div">
-          <img
-            src="./assets/favicon.svg"
-            alt="logo-mobile"
-            class="logo-mobile"
-          />
-          <h2 class="header-board-name launch-career" id="header-board-name">
-            Launch Career
-          </h2>
-        </div>
-        <button id="add-task-btn" class="add-task-btn">
-          <span>+ Add New Task</span>
-        </button>
-      </header>
-
-      <div class="container">
-        <main class="card-column-main">
-          <div id="status-message" class="status-message"></div>
-
-          <!-- Task Columns: Display tasks grouped by status (TODO, DOING, DONE). -->
-          <div class="column-div" data-status="todo">
-            <div id="todo-head-div" class="column-head-div">
-              <span class="dot" id="todo-dot"></span>
-              <h4 id="toDoText" class="columnHeader">TODO (2)</h4>
-            </div>
-            <!-- Tasks container for TODO -->
-            <div class="tasks-container"></div>
-          </div>
-          <!-- DOING Column -->
-          <div class="column-div" data-status="doing">
-            <div id="doing-head-div" class="column-head-div">
-              <span class="dot" id="doing-dot"></span>
-              <h4 id="doingText" class="columnHeader">DOING (2)</h4>
-            </div>
-            <!-- Tasks container for DOING -->
-            <div class="tasks-container"></div>
-          </div>
-          <!-- DONE Column -->
-          <div class="column-div" data-status="done">
-            <div id="done-head-div" class="column-head-div">
-              <span class="dot" id="done-dot"></span>
-              <h4 id="doneText" class="columnHeader">DONE (2)</h4>
-            </div>
-            <!-- Tasks container for DONE -->
-            <div class="tasks-container"></div>
-          </div>
-        </main>
-      </div>
+<body>
+  <!-- Navigation Sidebar -->
+  <nav class="side-bar" id="side-bar-div">
+    <div id="side-logo-div">
+      <img id="logo" src="./assets/logo-light.svg" alt="logo-light" />
     </div>
 
-    <dialog id="task-modal">
-      <form method="dialog" id="task-form">
-        <div class="modal-header">
-          <h3>Add New Task</h3>
-          <button type="button" class="close-btn" id="close-modal-btn">
-            &times;
-          </button>
+    <div class="boards-nav-links-div" id="boards-nav-links-div">
+      <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+      <button class="board-btn">Launch Career</button>
+    </div>
+
+    <!-- Theme toggle container -->
+    <div class="theme-toggle-wrapper">
+      <label class="theme-switch">
+        <span class="sun">☀️</span>
+        <input type="checkbox" id="theme-toggle-checkbox" />
+        <span class="slider"></span>
+        <span class="moon">🌑</span>
+      </label>
+    </div>
+
+    <button id="hide-sidebar-btn" class="hide-sidebar-btn">Hide Sidebar</button>
+  </nav>
+
+  <!-- Main Layout -->
+  <div id="layout">
+    <header id="header" class="sticky-header">
+      <div class="header-name-div">
+        <img
+          src="./assets/favicon.svg"
+          alt="logo-mobile"
+          class="logo-mobile"
+        />
+        <h2 class="header-board-name launch-career" id="header-board-name">
+          Launch Career
+        </h2>
+      </div>
+      <button id="add-task-btn" class="add-task-btn">
+        <span>+ Add New Task</span>
+      </button>
+    </header>
+
+    <div class="container">
+      <main class="card-column-main">
+        <div id="status-message" class="status-message"></div>
+
+        <!-- Task Columns -->
+        <div class="column-div" data-status="todo">
+          <div id="todo-head-div" class="column-head-div">
+            <span class="dot" id="todo-dot"></span>
+            <h4 id="toDoText" class="columnHeader">TODO (2)</h4>
+          </div>
+          <div class="tasks-container"></div>
         </div>
 
-        <label for="task-title">Title</label>
-        <input
-          type="text"
-          id="task-title"
-          name="title"
-          required
-          placeholder="e.g. Take a chilled break"
-        />
+        <div class="column-div" data-status="doing">
+          <div id="doing-head-div" class="column-head-div">
+            <span class="dot" id="doing-dot"></span>
+            <h4 id="doingText" class="columnHeader">DOING (2)</h4>
+          </div>
+          <div class="tasks-container"></div>
+        </div>
 
-        <label for="task-desc">Description</label>
-        <textarea
-          id="task-desc"
-          name="description"
-          rows="4"
-          placeholder="e.g. Pet your dog, have a cup of coffee, dance to your favourite song and come back to crush this challenge."
-        ></textarea>
+        <div class="column-div" data-status="done">
+          <div id="done-head-div" class="column-head-div">
+            <span class="dot" id="done-dot"></span>
+            <h4 id="doneText" class="columnHeader">DONE (2)</h4>
+          </div>
+          <div class="tasks-container"></div>
+        </div>
+      </main>
+    </div>
+  </div>
 
-        <label for="task-status">Status</label>
-        <select id="task-status" name="status" required>
-          <option value="todo">todo</option>
-          <option value="doing">doing</option>
-          <option value="done">done</option>
-        </select>
-
-        <!-- Submit button -->
-        <button type="submit" id="submit-task-btn" class="submit-task-btn">
-          Create Task
+  <dialog id="task-modal">
+    <form method="dialog" id="task-form">
+      <div class="modal-header">
+        <h3>Add New Task</h3>
+        <button type="button" class="close-btn" id="close-modal-btn">
+          &times;
         </button>
+      </div>
 
-        <!-- Delete button (only shown in edit mode) -->
-        <button type="button" id="delete-task-btn" class="delete-task-btn">
-          Delete Task
-        </button>
-      </form>
-    </dialog>
+      <label for="task-title">Title</label>
+      <input
+        type="text"
+        id="task-title"
+        name="title"
+        required
+        placeholder="e.g. Take a chilled break"
+      />
 
-    <!-- Googly Eyes Tab (initially hidden) -->
-    <button id="show-sidebar-btn" class="show-sidebar-btn" style="display: none;">
-      👀
-    </button>
-  </body>
+      <label for="task-desc">Description</label>
+      <textarea
+        id="task-desc"
+        name="description"
+        rows="4"
+        placeholder="e.g. Pet your dog, have a cup of coffee, dance to your favourite song and come back to crush this challenge."
+      ></textarea>
+
+      <label for="task-status">Status</label>
+      <select id="task-status" name="status" required>
+        <option value="todo">todo</option>
+        <option value="doing">doing</option>
+        <option value="done">done</option>
+      </select>
+
+      <button type="submit" id="submit-task-btn" class="submit-task-btn">
+        Create Task
+      </button>
+
+      <button type="button" id="delete-task-btn" class="delete-task-btn">
+        Delete Task
+      </button>
+    </form>
+  </dialog>
+
+  <button
+    id="show-sidebar-btn"
+    class="show-sidebar-btn"
+    style="display: none;"
+  >
+    👀
+  </button>
+</body>
 </html>
+
