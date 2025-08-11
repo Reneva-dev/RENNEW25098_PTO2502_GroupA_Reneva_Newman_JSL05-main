@@ -507,21 +507,34 @@ button:hover {
   background-color: var(--primary-color);
   border-right: 1px solid #e4ebfa;
   transition: transform 0.3s ease;
-  position: fixed; /* fix sidebar so it doesn't move with page */
+  position: fixed; /* Fix on left */
   top: 0;
   left: 0;
   z-index: 100;
-  transform: translateX(0); /* shown by default */
+  transform: translateX(0); /* visible */
+  /* Add padding to avoid overlap */
+  padding-bottom: 60px; /* enough space for hide button */
 }
 
 /* Sidebar hidden */
 .side-bar.hide {
-  transform: translateX(-100%);
+  transform: translateX(calc(-1 * var(--sidebar-width)));
 }
 
-/* Hide Sidebar button pinned to bottom */
+/* Push main layout right by sidebar width when sidebar is visible */
+#layout {
+  transition: margin-left 0.3s ease;
+  margin-left: var(--sidebar-width);
+}
+
+/* When sidebar hidden, remove left margin */
+#layout.full-width {
+  margin-left: 0;
+}
+
+/* Hide Sidebar button pinned to bottom inside sidebar */
 #hide-sidebar-btn {
-  margin-top: auto;
+  margin-top: auto; /* push to bottom */
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -533,9 +546,11 @@ button:hover {
   border-radius: 4px;
   flex-shrink: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  bottom: 20px; /* ensure visible at bottom */
 }
 
-/* Show Sidebar button (googly button) fixed at bottom left */
+/* Show Sidebar button fixed at bottom left */
 .show-sidebar-btn {
   position: fixed;
   bottom: 20px;
@@ -549,5 +564,6 @@ button:hover {
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   user-select: none;
   z-index: 1000;
-  display: none; /* hidden by default */
+  display: none; /* hidden initially */
 }
+
