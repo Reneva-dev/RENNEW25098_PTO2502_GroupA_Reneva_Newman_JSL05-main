@@ -559,4 +559,17 @@ dialog#task-modal {
   }
 }
 
+@media (max-width: 768px) {
+  .logo-mobile {
+    width: 40px;        /* smaller logo size */
+    height: auto;       /* maintain aspect ratio */
+    cursor: pointer;    /* show clickable */
+  }
+
+  .header-name-div {
+    padding: 5px;       /* reduce padding for smaller screens */
+  }
+}
+
+
 
