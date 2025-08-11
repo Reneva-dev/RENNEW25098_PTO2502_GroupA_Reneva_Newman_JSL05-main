@@ -531,4 +531,16 @@ dialog#task-modal {
   background-color: #7c72e8;
 }
 
+@media (max-width: 768px) {
+  /* Hide Launch Career text */
+  .header-board-name {
+    display: none;
+  }
+
+  /* Show logo (already visible, but just to confirm) */
+  .logo-mobile {
+    display: block;
+  }
+}
+
 
