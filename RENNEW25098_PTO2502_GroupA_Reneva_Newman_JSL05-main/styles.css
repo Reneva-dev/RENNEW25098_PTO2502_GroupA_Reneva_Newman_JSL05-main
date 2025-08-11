@@ -508,5 +508,11 @@ dialog#task-modal {
 #add-task-btn {
   background-color: #635FC7;
   color: white;
+  padding: 12px 24px; /* makes button bigger */
+  font-size: 16px;    /* increase font size */
+  border: none;       /* removes any border */
+  border-radius: 6px; /* optional: rounded corners */
+  cursor: pointer;    /* changes cursor on hover */
 }
+
 
