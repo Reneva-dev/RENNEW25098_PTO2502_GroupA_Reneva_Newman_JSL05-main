@@ -1,7 +1,32 @@
 /* ========================
    Global & Root Variables
 ======================== */
-/* ... your existing global and root variables ... */
+* {
+  box-sizing: border-box; /* Ensures padding and border are included in total element size */
+}
+
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #f4f7fd;
+  --primary-font-color: #000000;
+  --secondary-font-color: #828fa3;
+  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
+  --sidebar-width: 300px; /* Sidebar fixed width */
+}
+
+/* ================
+   Base Elements
+================= */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex; /* Allow layout to span horizontally */
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--secondary-color);
+  font-size: 1rem; /* Base font size for rem scaling */
+}
 
 /* ================
    Sidebar Layout
@@ -18,8 +43,8 @@
   left: 0;
   z-index: 100;
   transform: translateX(0); /* visible */
-  /* Add padding to avoid overlap */
-  padding-bottom: 100px; /* UPDATED: increased padding-bottom for toggle + hide button */
+  transition: transform 0.3s ease;
+  padding-bottom: 60px; /* enough space for hide button */
 }
 
 /* Sidebar hidden */
@@ -29,6 +54,8 @@
 
 /* Push main layout right by sidebar width when sidebar is visible */
 #layout {
+  flex: 1; /* fills remaining space */
+  overflow-x: hidden; /* Prevent horizontal scroll */
   transition: margin-left 0.3s ease;
   margin-left: var(--sidebar-width);
 }
@@ -56,11 +83,28 @@
   bottom: 20px; /* ensure visible at bottom */
 }
 
+/* Show Sidebar button fixed at bottom left */
+.show-sidebar-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  background: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  user-select: none;
+  z-index: 1000;
+  display: none; /* hidden initially */
+}
+
 /* Container aligns toggle above hide button with same width */
 #theme-toggle-container {
   width: 90%;
-  margin: 0 auto 16px auto; /* UPDATED: centered horizontally, margin bottom for spacing */
-  flex-shrink: 0;           /* prevent shrinking */
+  margin: 0 auto 12px auto;
+  flex-shrink: 0;
 }
 
 /* The toggle switch label */
@@ -70,29 +114,20 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 36px;           /* UPDATED: smaller height */
-  background-color: var(--secondary-color);
+  height: 48px;
+  background-color: var(--secondary-color); /* #F4F7FD light bg */
   border-radius: 4px;
-  padding: 0 10px;        /* UPDATED: reduced horizontal padding */
+  padding: 0 12px;
   cursor: pointer;
   user-select: none;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  font-size: 0;           /* UPDATED: remove extra inline space */
 }
 
 /* Sun and Moon icons styling */
 .theme-switch .sun,
 .theme-switch .moon {
-  font-size: 18px;        /* UPDATED: smaller icons */
-  line-height: 1;
+  font-size: 1.25rem;
   flex-shrink: 0;
-  color: #f39c12;         /* sun color */
-  filter: invert(0.2);    /* subtle color tweak */
-}
-
-.theme-switch .moon {
-  color: #222;            /* dark moon color */
-  filter: none;
 }
 
 /* Hide the native checkbox */
@@ -107,10 +142,10 @@
 .theme-switch .slider {
   position: relative;
   flex-grow: 1;
-  height: 20px;           /* UPDATED: smaller slider height */
-  background-color: #635FC7;
+  height: 24px;
+  background-color: #635FC7; /* default light mode bg */
   border-radius: 12px;
-  margin: 0 8px;          /* UPDATED: reduced horizontal margin */
+  margin: 0 10px;
   transition: background-color 0.3s ease;
 }
 
@@ -118,8 +153,8 @@
 .theme-switch .slider::before {
   content: "";
   position: absolute;
-  height: 20px;           /* UPDATED: smaller knob */
-  width: 20px;
+  height: 24px;
+  width: 24px;
   left: 0;
   top: 0;
   background-color: white; /* white knob for light mode */
@@ -129,12 +164,238 @@
 
 /* Checked (dark mode) styles */
 .theme-switch input:checked + .slider {
-  background-color: #ffffff;
+  background-color: #ffffff; /* slider track changes to white in dark mode */
 }
 
 .theme-switch input:checked + .slider::before {
-  background-color: #635FC7;
+  background-color: #635FC7; /* knob changes to purple in dark mode */
   transform: translateX(100%);
 }
 
-/* ... the rest of your CSS below unchanged ... */
+/* ================
+   Other styles from your original CSS
+================= */
+
+/* Side Logo */
+#side-logo-div {
+  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  display: flex;
+  justify-content: flex-start;
+}
+
+#logo {
+  width: 100%; /* Make logo responsive within container */
+}
+
+/* Boards navigation */
+.boards-nav-links-div {
+  display: flex;
+  flex-direction: column;
+  color: var(--primary-font-color);
+}
+
+#headline-sidepanel {
+  padding: 0 12px 0 50px; /* Aligns section content from left and right */
+}
+
+h4 {
+  color: var(--secondary-font-color);
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem; /* Makes heading more spaced */
+}
+
+/* Board buttons */
+.board-btn {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  background-color: #635fc7;
+  color: #fff;
+  border: none;
+  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  height: 48px;
+  width: 276px;
+  padding: 28px 12px 28px 50px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+  cursor: pointer;
+  overflow: hidden; /* Prevents overflowed text/icons from showing */
+}
+
+/* Main layout */
+#layout {
+  /* already defined above */
+}
+
+/* Header Section */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
+  height: 96px;
+  padding: 0 35px 0 30px;
+  border-bottom: 1px solid #e4ebfa;
+  width: 100%;
+  font-size: 1.875rem;
+  font-weight: 600;
+}
+
+.header-name-div {
+  display: flex;
+  align-items: center;
+}
+
+.logo-mobile {
+  display: none; /* Hidden on desktop; shown on smaller screens */
+}
+
+/* Board Columns */
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-left: 35px;
+  box-sizing: border-box;
+}
+
+.card-column-main {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 304px)); /* 3 columns with min size */
+  gap: 8px; /* Space between columns */
+}
+
+.column-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 12px;
+}
+
+.column-head-div {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between dot and column title */
+}
+
+.columnHeader {
+  font-size: 0.75rem;
+  letter-spacing: 0.125rem;
+  color: var(--secondary-font-color);
+  margin: 0;
+}
+
+/* Status Dots */
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%; /* Make it circular */
+  display: inline-block;
+}
+
+#todo-dot {
+  background-color: #49c4e5;
+}
+
+#doing-dot {
+  background-color: #8471f2;
+}
+
+#done-dot {
+  background-color: #219c90;
+}
+
+/* Task Cards */
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-div {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  width: 100%;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: var(--primary-font-color);
+  border-radius: 12px;
+  box-shadow: var(--primary-box-shadow);
+  cursor: pointer; /* Indicate it's clickable */
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  font-weight: bold;
+}
+
+/* Headings */
+h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* Modal Styles */
+dialog {
+  position: fixed;
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+}
+
+#task-modal::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+#task-modal {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  padding: 24px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #635fc7;
+}
+
+/* ==================
+   Responsive Styles
+=================== */
+@media (max-width: 768px) {
+  /* Sidebar hides by default on mobile */
+  .side-bar {
+    transform: translateX(calc(-1 * var(--sidebar-width)));
+    position: fixed;
+    z-index: 1000;
+  }
+
+  /* Show Sidebar button visible on mobile */
+  .show-sidebar-btn {
+    display: block;
+  }
+
+  /* Layout fills full width */
+  #layout {
+    margin-left: 0 !important;
+  }
+}
+
