@@ -1,6 +1,6 @@
 // modal.js
 
-import { loadTasks, saveTasks } from "./storage.js";
+import { loadTasks, saveTasks, deleteTask } from "./storage.js";
 import { clearExistingTasks, renderTasks } from "./render.js";
 
 let currentTaskId = null;
@@ -17,15 +17,14 @@ export function openTaskModal(task) {
   const submitBtn = document.getElementById("submit-task-btn");
   const deleteBtn = document.getElementById("delete-task-btn");
 
-  // Populate fields
   titleInput.value = task.title;
   descInput.value = task.description;
   statusSelect.value = task.status;
-
   if (submitBtn) submitBtn.textContent = "Update Task";
+
   currentTaskId = task.id;
 
-  // Show delete button in edit mode
+  // Show the delete button for editing tasks
   if (deleteBtn) deleteBtn.style.display = "block";
 
   modal.showModal();
@@ -49,7 +48,6 @@ export function setupAddTaskModal() {
   const deleteBtn = document.getElementById("delete-task-btn");
   const modal = document.getElementById("task-modal");
 
-  // Open modal for adding a new task
   addTaskBtn.addEventListener("click", () => {
     currentTaskId = null;
     taskForm.reset();
@@ -61,32 +59,26 @@ export function setupAddTaskModal() {
     const submitBtn = document.getElementById("submit-task-btn");
     if (submitBtn) submitBtn.textContent = "Create Task";
 
-    // Hide delete button for new tasks
+    // Hide delete button when adding a new task
     if (deleteBtn) deleteBtn.style.display = "none";
 
     modal.showModal();
   });
 
-  // Handle delete task
-  if (deleteBtn) {
-    deleteBtn.addEventListener("click", () => {
-      if (!currentTaskId) return;
+  deleteBtn.addEventListener("click", () => {
+    if (!currentTaskId) return;
 
-      const confirmDelete = confirm("Are you sure you want to delete this task?");
-      if (!confirmDelete) return;
+    const confirmDelete = confirm("Are you sure you want to delete this task?");
+    if (!confirmDelete) return;
 
-      let tasks = loadTasks();
-      tasks = tasks.filter((task) => task.id !== currentTaskId);
-      saveTasks(tasks);
+    deleteTask(currentTaskId);
 
-      modal.close();
-      clearExistingTasks();
-      renderTasks(loadTasks());
-      currentTaskId = null;
-    });
-  }
+    modal.close();
+    clearExistingTasks();
+    renderTasks(loadTasks());
+    currentTaskId = null;
+  });
 
-  // Handle form submission (add/update task)
   taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -121,3 +113,4 @@ export function setupAddTaskModal() {
     currentTaskId = null;
   });
 }
+
