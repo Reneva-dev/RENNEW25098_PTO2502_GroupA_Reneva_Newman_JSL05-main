@@ -45,7 +45,7 @@ async function init() {
 document.addEventListener("DOMContentLoaded", () => {
   init();
 
-  // Sidebar toggle functionality
+  // Sidebar toggle functionality (desktop hide/show buttons)
   const sidebar = document.getElementById("side-bar-div");
   const hideBtn = document.getElementById("hide-sidebar-btn");
   const showBtn = document.getElementById("show-sidebar-btn");
@@ -59,6 +59,14 @@ document.addEventListener("DOMContentLoaded", () => {
     sidebar.style.display = "flex";     // Show sidebar as flex (important!)
     showBtn.style.display = "none";     // Hide googly eyes tab
   });
+
+  // Mobile sidebar toggle on app logo click
+  const mobileLogo = document.querySelector(".logo-mobile");
+  if (mobileLogo && sidebar) {
+    mobileLogo.addEventListener("click", () => {
+      sidebar.classList.toggle("mobile-active");
+    });
+  }
 });
 
 const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
@@ -88,30 +96,5 @@ themeToggleCheckbox.addEventListener("change", () => {
     applyTheme("light");
   }
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-  const logoMobile = document.querySelector('.logo-mobile');
-  const sideBar = document.querySelector('.side-bar');
-
-  logoMobile.addEventListener('click', () => {
-    if (sideBar.classList.contains('hide')) {
-      sideBar.classList.remove('hide');
-    } else {
-      sideBar.classList.add('hide');
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.querySelector(".side-bar");
-  const mobileLogo = document.getElementById("mobile-logo-toggle");
-
-  if (mobileLogo && sidebar) {
-    mobileLogo.addEventListener("click", () => {
-      sidebar.classList.toggle("mobile-active");
-    });
-  }
-});
-
 
 
