@@ -85,34 +85,41 @@
         </main>
       </div>
     </div>
-    <!-- Modal: Displays each tasks details when the task is clicked -->
     <dialog id="task-modal">
-      <form method="dialog" id="task-form">
-        <div class="modal-header">
-          <h3>Add New Task</h3>
-          <button type="button" class="close-btn" id="close-modal-btn">
-            &times;
-          </button>
-        </div>
+  <form method="dialog" id="task-form">
+    <div class="modal-header">
+      <h3>Add New Task</h3>
+      <button type="button" class="close-btn" id="close-modal-btn">
+        &times;
+      </button>
+    </div>
 
-        <label for="task-title">Title</label>
-<input type="text" id="task-title" name="title" required placeholder="e.g. Take a chilled break" />
+    <label for="task-title">Title</label>
+    <input type="text" id="task-title" name="title" required placeholder="e.g. Take a chilled break" />
 
-<label for="task-desc">Description</label>
-<textarea id="task-desc" name="description" rows="4" placeholder="e.g. Pet your dog, have a cup of coffee, dance to your favourite song and come back to crush this challenge."></textarea>
+    <label for="task-desc">Description</label>
+    <textarea id="task-desc" name="description" rows="4"
+      placeholder="e.g. Pet your dog, have a cup of coffee, dance to your favourite song and come back to crush this challenge."></textarea>
 
+    <label for="task-status">Status</label>
+    <select id="task-status" name="status" required>
+      <option value="todo">todo</option>
+      <option value="doing">doing</option>
+      <option value="done">done</option>
+    </select>
 
-        <label for="task-status">Status</label>
-        <select id="task-status" name="status" required>
-          <option value="todo">todo</option>
-          <option value="doing">doing</option>
-          <option value="done">done</option>
-        </select>
-        <button type="submit" id="submit-task-btn" class="submit-task-btn">
-          <!-- ✅ Delete button (only visible in edit mode) -->
-<button type="button" id="delete-task-btn" class="delete-task-btn">
-  Delete Task
-</button>
+    <!-- Submit button -->
+    <button type="submit" id="submit-task-btn" class="submit-task-btn">
+      Create Task
+    </button>
+
+    <!-- Delete button (only shown in edit mode) -->
+    <button type="button" id="delete-task-btn" class="delete-task-btn">
+      Delete Task
+    </button>
+  </form>
+</dialog>
+
 
 
   Create Task
