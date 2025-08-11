@@ -42,20 +42,23 @@ async function init() {
   setupAddTaskModal();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
+  init();
 
-const sidebar = document.getElementById("side-bar-div");
-const hideBtn = document.getElementById("hide-sidebar-btn");
-const showBtn = document.getElementById("show-sidebar-btn");
+  // Sidebar toggle functionality
+  const sidebar = document.getElementById("side-bar-div");
+  const hideBtn = document.getElementById("hide-sidebar-btn");
+  const showBtn = document.getElementById("show-sidebar-btn");
 
-hideBtn.addEventListener("click", () => {
-  sidebar.style.display = "none";     // Hide sidebar
-  showBtn.style.display = "block";    // Show googly eyes tab
-});
+  hideBtn.addEventListener("click", () => {
+    sidebar.style.display = "none";     // Hide sidebar
+    showBtn.style.display = "block";    // Show googly eyes tab
+  });
 
-showBtn.addEventListener("click", () => {
-  sidebar.style.display = "block";    // Show sidebar
-  showBtn.style.display = "none";     // Hide googly eyes tab
+  showBtn.addEventListener("click", () => {
+    sidebar.style.display = "flex";     // Show sidebar as flex (important!)
+    showBtn.style.display = "none";     // Hide googly eyes tab
+  });
 });
 
 
