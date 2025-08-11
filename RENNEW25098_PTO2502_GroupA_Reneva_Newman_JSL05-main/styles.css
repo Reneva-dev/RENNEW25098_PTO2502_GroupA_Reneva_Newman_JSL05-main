@@ -544,12 +544,12 @@ dialog#task-modal {
 }
 
 @media (max-width: 768px) {
-  /* Hide buttons on mobile */
   #hide-sidebar-btn,
   #show-sidebar-btn {
     display: none !important;
   }
 }
+
 
 @media (max-width: 768px) {
   .card-column-main {
