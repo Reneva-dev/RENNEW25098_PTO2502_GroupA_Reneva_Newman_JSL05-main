@@ -63,6 +63,11 @@ showBtn.addEventListener("click", () => {
 
   // Mobile sidebar toggle on app logo click
   const mobileLogo = document.getElementById("mobile-logo-toggle");
+    // --- ADD THE TEST LISTENER BELOW ---
+  if (mobileLogo) {
+    mobileLogo.addEventListener("click", () => {
+      alert('Logo clicked!');  // This is the test alert
+    });
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
       sidebar.classList.toggle("mobile-active");
