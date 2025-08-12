@@ -657,60 +657,55 @@ dialog#task-modal {
   --dot-done: #67e2ae;
 }
 
-/* Example element overrides if your current CSS uses hardcoded colors */
+/* Dark theme general body */
 .dark-theme body {
   background-color: var(--secondary-color);
   color: var(--text-color);
 }
 
-.dark-theme .side-bar {
-  background-color: var(--sidebar-bg);
-}
-
-.dark-theme .header-board-name,
-.dark-theme h4,
-.dark-theme p {
+/* Dark theme header bar at top */
+.dark-theme header {
+  background-color: var(--header-bg);
   color: var(--text-color);
 }
 
+/* Sidebar background and text */
+.dark-theme .side-bar {
+  background-color: #635FC7; /* Your requested purple */
+  color: var(--text-color);
+}
+
+/* Hide Sidebar button styling */
+.dark-theme #hide-sidebar-btn {
+  background-color: #635FC7;
+  color: var(--text-color);
+  box-shadow: none;
+}
+
+/* Show Sidebar button styling */
+.dark-theme .show-sidebar-btn {
+  background-color: #635FC7;
+  color: var(--text-color);
+  box-shadow: none;
+}
+
+/* Toggle switch background track */
 .dark-theme .theme-switch {
   background-color: var(--secondary-color);
 }
 
-/* New overrides */
-  header {
-    background-color: var(--header-bg);
-    color: var(--text-color);
-  }
+/* Toggle slider background in light mode */
+.dark-theme .theme-switch .slider {
+  background-color: #635FC7;
+}
 
-  .side-bar {
-    background-color: #635FC7; /* sidebar purple background */
-    color: var(--text-color);
-  }
+/* Toggle slider background when checked (dark mode) */
+.dark-theme .theme-switch input:checked + .slider {
+  background-color: #ffffff;
+}
 
-  #hide-sidebar-btn {
-    background-color: #635FC7;
-    color: var(--text-color);
-    box-shadow: none;
-  }
-
-  .show-sidebar-btn {
-    background-color: #635FC7;
-    color: var(--text-color);
-    box-shadow: none;
-  }
-
-  /* Toggle slider */
-  .theme-switch .slider {
-    background-color: #635FC7;
-  }
-
-  .theme-switch input:checked + .slider {
-    background-color: #ffffff;
-  }
-
-  .theme-switch input:checked + .slider::before {
-    background-color: #635FC7;
-    transform: translateX(100%);
-  }
+/* Toggle knob color and position when checked */
+.dark-theme .theme-switch input:checked + .slider::before {
+  background-color: #635FC7;
+  transform: translateX(100%);
 }
