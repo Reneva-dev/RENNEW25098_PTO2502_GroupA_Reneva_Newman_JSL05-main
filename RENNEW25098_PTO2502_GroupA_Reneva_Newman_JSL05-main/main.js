@@ -42,7 +42,6 @@ async function init() {
   setupAddTaskModal();
 }
 
-// Wrap all setup inside one DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
   init();
 
@@ -73,36 +72,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // DARK MODE SETUP
+  // DARK MODE FUNCTIONALITY
   const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
-  if (themeToggleCheckbox) {
-    // Function to apply the theme and save preference
-    function applyTheme(theme) {
-      if (theme === "dark") {
-        document.body.classList.add("dark-theme");
-        themeToggleCheckbox.checked = true;
-      } else {
-        document.body.classList.remove("dark-theme");
-        themeToggleCheckbox.checked = false;
-      }
-      localStorage.setItem("theme", theme);
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-theme");
+      themeToggleCheckbox.checked = true;
+    } else {
+      document.body.classList.remove("dark-theme");
+      themeToggleCheckbox.checked = false;
     }
+    localStorage.setItem("theme", theme);
+  }
 
-    // Apply saved theme immediately on load
+  if (themeToggleCheckbox) {
+    // Apply saved theme immediately
     const savedTheme = localStorage.getItem("theme") || "light";
     applyTheme(savedTheme);
 
-    // Listen for toggle changes
+    // Toggle event listener
     themeToggleCheckbox.addEventListener("change", () => {
-      if (themeToggleCheckbox.checked) {
-        applyTheme("dark");
-      } else {
-        applyTheme("light");
-      }
+      applyTheme(themeToggleCheckbox.checked ? "dark" : "light");
     });
   } else {
-    console.warn("Theme toggle checkbox not found!");
+    console.warn("Theme toggle checkbox not found");
   }
 });
+
 
