@@ -46,31 +46,26 @@ document.addEventListener("DOMContentLoaded", () => {
   init();
 
   // Sidebar toggle functionality (desktop hide/show buttons)
-const sidebar = document.getElementById("side-bar-div");
-const hideBtn = document.getElementById("hide-sidebar-btn");
-const showBtn = document.getElementById("show-sidebar-btn");
+  const sidebar = document.getElementById("side-bar-div");
+  const hideBtn = document.getElementById("hide-sidebar-btn");
+  const showBtn = document.getElementById("show-sidebar-btn");
 
-hideBtn.addEventListener("click", () => {
-  sidebar.classList.add("sidebar-hidden");   // Hide sidebar by adding class
-  showBtn.style.display = "block";            // Show 'show sidebar' button
-});
+  hideBtn.addEventListener("click", () => {
+    sidebar.style.display = "none";     // Hide sidebar
+    showBtn.style.display = "block";    // Show googly eyes tab
+  });
 
-showBtn.addEventListener("click", () => {
-  sidebar.classList.remove("sidebar-hidden"); // Show sidebar by removing class
-  showBtn.style.display = "none";              // Hide 'show sidebar' button
-});
-
+  showBtn.addEventListener("click", () => {
+    sidebar.style.display = "flex";     // Show sidebar as flex (important!)
+    showBtn.style.display = "none";     // Hide googly eyes tab
+  });
 
   // Mobile sidebar toggle on app logo click
   const mobileLogo = document.getElementById("mobile-logo-toggle");
-    // --- ADD THE TEST LISTENER BELOW ---
-  if (mobileLogo) {
-    mobileLogo.addEventListener("click", () => {
-      alert('Logo clicked!');  // This is the test alert
-    });
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
-      sidebar.classList.toggle("mobile-active");
+      alert('Logo clicked!');  // Test alert for mobile logo click
+      // sidebar.classList.toggle("mobile-active"); // Uncomment this to enable toggle after testing
     });
   }
 });
@@ -102,5 +97,3 @@ themeToggleCheckbox.addEventListener("change", () => {
     applyTheme("light");
   }
 });
-
-
