@@ -617,3 +617,19 @@ dialog#task-modal {
     gap: 16px;
   }
 }
+
+/* Desktop sidebar - visible by default */
+.side-bar {
+  display: flex; /* Ensure visible on desktop */
+  position: fixed;
+  width: var(--sidebar-width);
+  height: 100vh;
+  /* Other styles you already have */
+  transition: margin-left 0.3s ease, transform 0.3s ease;
+}
+
+/* When sidebar is hidden on desktop */
+.side-bar.sidebar-hidden {
+  margin-left: calc(-1 * var(--sidebar-width));
+  /* Or alternatively: transform: translateX(calc(-1 * var(--sidebar-width))); */
+}
