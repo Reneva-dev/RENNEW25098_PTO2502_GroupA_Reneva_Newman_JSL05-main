@@ -57,6 +57,12 @@ body {
   flex-shrink: 0;
 }
 
+.sidebar-top-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* spacing between logo and nav */
+}
+
 
 /* Sidebar hidden */
 .side-bar.hide {
