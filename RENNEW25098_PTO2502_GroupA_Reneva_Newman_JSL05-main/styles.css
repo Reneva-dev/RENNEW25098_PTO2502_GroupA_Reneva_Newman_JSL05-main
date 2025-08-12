@@ -53,17 +53,19 @@ body {
 }
 
 /* Push main layout right by sidebar width when sidebar is visible */
+/* Base layout - no sidebar gap */
 #layout {
-  flex: 1; /* fills remaining space */
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  transition: margin-left 0.3s ease;
-  margin-left: var(--sidebar-width);
+    overflow-x: hidden;
+    margin-left: 0; /* Default flush position */
+    flex: 1 1 0%;
+    transition: margin-left 0.3s ease;
 }
 
-/* When sidebar hidden, remove left margin */
-#layout.full-width {
-  margin-left: 0;
+/* When sidebar is open */
+.sidebar-open #layout {
+    margin-left: var(--sidebar-width); /* Push over by sidebar width */
 }
+
 
 /* Hide Sidebar button pinned to bottom inside sidebar */
 #hide-sidebar-btn {
