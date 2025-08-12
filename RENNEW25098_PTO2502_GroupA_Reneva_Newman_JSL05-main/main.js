@@ -43,6 +43,7 @@ async function init() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize tasks and modals
   init();
 
   // Sidebar toggle functionality (desktop hide/show buttons)
@@ -50,15 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const hideBtn = document.getElementById("hide-sidebar-btn");
   const showBtn = document.getElementById("show-sidebar-btn");
 
-  hideBtn.addEventListener("click", () => {
-    sidebar.style.display = "none";     // Hide sidebar
-    showBtn.style.display = "block";    // Show googly eyes tab
-  });
+  if (hideBtn && showBtn && sidebar) {
+    hideBtn.addEventListener("click", () => {
+      sidebar.style.display = "none";     // Hide sidebar
+      showBtn.style.display = "block";    // Show googly eyes tab
+    });
 
-  showBtn.addEventListener("click", () => {
-    sidebar.style.display = "flex";     // Show sidebar as flex (important!)
-    showBtn.style.display = "none";     // Hide googly eyes tab
-  });
+    showBtn.addEventListener("click", () => {
+      sidebar.style.display = "flex";     // Show sidebar as flex (important!)
+      showBtn.style.display = "none";     // Hide googly eyes tab
+    });
+  }
 
   // Mobile sidebar toggle on app logo click — only for mobile screen widths
   const mobileLogo = document.getElementById("mobile-logo-toggle");
@@ -69,33 +72,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
 
-const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
+  // Dark mode toggle setup
+  const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
-function applyTheme(theme) {
-  if (theme === "dark") {
-    document.body.classList.add("dark-theme");
-    themeToggleCheckbox.checked = true;
-  } else {
-    document.body.classList.remove("dark-theme");
-    themeToggleCheckbox.checked = false;
+  if (themeToggleCheckbox) {
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.body.classList.add("dark-theme");
+        themeToggleCheckbox.checked = true;
+      } else {
+        document.body.classList.remove("dark-theme");
+        themeToggleCheckbox.checked = false;
+      }
+      localStorage.setItem("theme", theme);
+    }
+
+    // On page load, apply saved theme or default to light
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
+
+    // Toggle handler
+    themeToggleCheckbox.addEventListener("change", () => {
+      if (themeToggleCheckbox.checked) {
+        applyTheme("dark");
+      } else {
+        applyTheme("light");
+      }
+    });
   }
-  localStorage.setItem("theme", theme);
-}
-
-// On page load, apply saved theme or default to light
-document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  applyTheme(savedTheme);
 });
-
-// Toggle handler
-themeToggleCheckbox.addEventListener("change", () => {
-  if (themeToggleCheckbox.checked) {
-    applyTheme("dark");
-  } else {
-    applyTheme("light");
-  }
-});
-
