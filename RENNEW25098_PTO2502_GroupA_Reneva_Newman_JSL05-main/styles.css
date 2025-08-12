@@ -34,18 +34,20 @@ body {
 .side-bar {
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* Added */
   background-color: var(--primary-color);
-  border-right: 1px solid #e4ebfa; /* Light divider */
+  border-right: 1px solid #e4ebfa;
   width: var(--sidebar-width);
   height: 100vh;
-  position: fixed; /* Fix on left */
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
-  transform: translateX(0); /* visible */
+  transform: translateX(0);
   transition: transform 0.3s ease;
-  padding-bottom: 60px; /* enough space for hide button */
+  padding: 1rem 0 20px 0; /* Updated padding: keep top and bottom space */
 }
+
 
 /* Sidebar hidden */
 .side-bar.hide {
