@@ -83,5 +83,26 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.add("dark-theme");
         themeToggleCheckbox.checked = true;
       } else {
-        document.
+        document.body.classList.remove("dark-theme");
+        themeToggleCheckbox.checked = false;
+      }
+      localStorage.setItem("theme", theme);
+    }
+
+    // Apply saved theme immediately on load
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
+
+    // Listen for toggle changes
+    themeToggleCheckbox.addEventListener("change", () => {
+      if (themeToggleCheckbox.checked) {
+        applyTheme("dark");
+      } else {
+        applyTheme("light");
+      }
+    });
+  } else {
+    console.warn("Theme toggle checkbox not found!");
+  }
+});
 
