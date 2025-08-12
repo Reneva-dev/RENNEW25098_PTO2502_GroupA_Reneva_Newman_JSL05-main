@@ -677,3 +677,40 @@ dialog#task-modal {
   background-color: var(--secondary-color);
 }
 
+/* New overrides */
+  header {
+    background-color: var(--header-bg);
+    color: var(--text-color);
+  }
+
+  .side-bar {
+    background-color: #635FC7; /* sidebar purple background */
+    color: var(--text-color);
+  }
+
+  #hide-sidebar-btn {
+    background-color: #635FC7;
+    color: var(--text-color);
+    box-shadow: none;
+  }
+
+  .show-sidebar-btn {
+    background-color: #635FC7;
+    color: var(--text-color);
+    box-shadow: none;
+  }
+
+  /* Toggle slider */
+  .theme-switch .slider {
+    background-color: #635FC7;
+  }
+
+  .theme-switch input:checked + .slider {
+    background-color: #ffffff;
+  }
+
+  .theme-switch input:checked + .slider::before {
+    background-color: #635FC7;
+    transform: translateX(100%);
+  }
+}
