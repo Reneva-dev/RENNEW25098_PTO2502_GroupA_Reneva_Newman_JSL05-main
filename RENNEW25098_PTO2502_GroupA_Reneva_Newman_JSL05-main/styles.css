@@ -644,3 +644,35 @@ dialog#task-modal {
 .sidebar-hidden ~ #layout {
   margin-left: 0;
 }
+
+/* ===== Dark Theme Overrides ===== */
+.dark-theme {
+  --sidebar-bg: #2b2c37;
+  --secondary-color: #20212c;
+  --text-color: #ffffff;
+  --header-bg: #2b2c37;
+  --card-bg: #2b2c37;
+  --dot-todo: #49c4e5;
+  --dot-doing: #8471f2;
+  --dot-done: #67e2ae;
+}
+
+/* Example element overrides if your current CSS uses hardcoded colors */
+.dark-theme body {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.dark-theme .side-bar {
+  background-color: var(--sidebar-bg);
+}
+
+.dark-theme .header-board-name,
+.dark-theme h4,
+.dark-theme p {
+  color: var(--text-color);
+}
+
+.dark-theme .theme-switch {
+  background-color: var(--secondary-color);
+}
