@@ -60,12 +60,13 @@ document.addEventListener("DOMContentLoaded", () => {
     showBtn.style.display = "none";     // Hide googly eyes tab
   });
 
-  // Mobile sidebar toggle on app logo click
+  // Mobile sidebar toggle on app logo click — only for mobile screen widths
   const mobileLogo = document.getElementById("mobile-logo-toggle");
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
-      alert('Logo clicked!');  // Test alert for mobile logo click
-      // sidebar.classList.toggle("mobile-active"); // Uncomment this to enable toggle after testing
+      if (window.innerWidth <= 768) {
+        sidebar.classList.toggle("mobile-active");
+      }
     });
   }
 });
@@ -97,3 +98,4 @@ themeToggleCheckbox.addEventListener("change", () => {
     applyTheme("light");
   }
 });
+
