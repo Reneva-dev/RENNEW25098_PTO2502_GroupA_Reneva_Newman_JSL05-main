@@ -48,6 +48,15 @@ body {
   padding: 1rem 0 20px 0; /* Updated padding: keep top and bottom space */
 }
 
+.theme-hide-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 90%;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
 
 /* Sidebar hidden */
 .side-bar.hide {
