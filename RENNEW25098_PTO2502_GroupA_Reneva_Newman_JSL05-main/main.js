@@ -42,8 +42,8 @@ async function init() {
   setupAddTaskModal();
 }
 
+// Wrap all setup inside one DOMContentLoaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize tasks and modals
   init();
 
   // Sidebar toggle functionality (desktop hide/show buttons)
@@ -53,17 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (hideBtn && showBtn && sidebar) {
     hideBtn.addEventListener("click", () => {
-      sidebar.style.display = "none";     // Hide sidebar
-      showBtn.style.display = "block";    // Show googly eyes tab
+      sidebar.style.display = "none";
+      showBtn.style.display = "block";
     });
 
     showBtn.addEventListener("click", () => {
-      sidebar.style.display = "flex";     // Show sidebar as flex (important!)
-      showBtn.style.display = "none";     // Hide googly eyes tab
+      sidebar.style.display = "flex";
+      showBtn.style.display = "none";
     });
   }
 
-  // Mobile sidebar toggle on app logo click — only for mobile screen widths
+  // Mobile sidebar toggle on app logo click
   const mobileLogo = document.getElementById("mobile-logo-toggle");
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
@@ -73,32 +73,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Dark mode toggle setup
+  // DARK MODE SETUP
   const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
   if (themeToggleCheckbox) {
+    // Function to apply the theme and save preference
     function applyTheme(theme) {
       if (theme === "dark") {
         document.body.classList.add("dark-theme");
         themeToggleCheckbox.checked = true;
       } else {
-        document.body.classList.remove("dark-theme");
-        themeToggleCheckbox.checked = false;
-      }
-      localStorage.setItem("theme", theme);
-    }
+        document.
 
-    // On page load, apply saved theme or default to light
-    const savedTheme = localStorage.getItem("theme") || "light";
-    applyTheme(savedTheme);
-
-    // Toggle handler
-    themeToggleCheckbox.addEventListener("change", () => {
-      if (themeToggleCheckbox.checked) {
-        applyTheme("dark");
-      } else {
-        applyTheme("light");
-      }
-    });
-  }
-});
