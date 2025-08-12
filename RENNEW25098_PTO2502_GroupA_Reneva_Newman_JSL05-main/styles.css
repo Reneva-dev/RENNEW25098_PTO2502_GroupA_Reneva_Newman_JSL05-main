@@ -633,3 +633,14 @@ dialog#task-modal {
   margin-left: calc(-1 * var(--sidebar-width));
   /* Or alternatively: transform: translateX(calc(-1 * var(--sidebar-width))); */
 }
+
+/* Default main content on desktop */
+#layout {
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s ease;
+}
+
+/* When sidebar is hidden on desktop */
+.sidebar-hidden ~ #layout {
+  margin-left: 0;
+}
