@@ -102,40 +102,40 @@ export function setupAddTaskModal() {
   });
 
   // Submit form (create or update task)
-  taskForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+ taskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    const title = document.getElementById("task-title").value.trim();
-    const description = document.getElementById("task-desc").value.trim();
-    const status = document.getElementById("task-status").value;
-    const priority = prioritySelect.value; // capture priority
-    if (!title || !status) return;
+  const title = document.getElementById("task-title").value.trim();
+  const description = document.getElementById("task-desc").value.trim();
+  const status = document.getElementById("task-status").value;
+  const priority = document.getElementById("task-priority").value;
 
-    const tasks = loadTasks();
+  if (!title || !status) return; // simple validation
 
-    if (currentTaskId !== null) {
-      const taskIndex = tasks.findIndex((t) => t.id === currentTaskId);
-      if (taskIndex !== -1) {
-        tasks[taskIndex].title = title;
-        tasks[taskIndex].description = description;
-        tasks[taskIndex].status = status;
-        tasks[taskIndex].priority = priority; // save priority per task
-      }
-    } else {
-      const newTask = {
-        id: Date.now(),
-        title,
-        description,
-        status,
-        priority, // save priority for new task
-      };
-      tasks.push(newTask);
+  const tasks = loadTasks();
+
+  if (currentTaskId !== null) {
+    // Update existing task
+    const taskIndex = tasks.findIndex((t) => t.id === currentTaskId);
+    if (taskIndex !== -1) {
+      tasks[taskIndex] = { ...tasks[taskIndex], title, description, status, priority };
     }
+  } else {
+    // Create new task
+    const newTask = {
+      id: Date.now(),
+      title,
+      description,
+      status,
+      priority,
+    };
+    tasks.push(newTask);
+  }
 
-    saveTasks(tasks);
-    modal.close();
-    clearExistingTasks();
-    renderTasks(loadTasks());
-    currentTaskId = null;
-  });
-}
+  saveTasks(tasks);
+  clearExistingTasks();
+  renderTasks(loadTasks());
+  modal.close();
+  currentTaskId = null;
+});
+
