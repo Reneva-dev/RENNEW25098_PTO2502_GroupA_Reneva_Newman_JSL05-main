@@ -47,6 +47,7 @@ export function setupAddTaskModal() {
   const taskForm = document.getElementById("task-form");
   const deleteBtn = document.getElementById("delete-task-btn");
   const modal = document.getElementById("task-modal");
+  const prioritySelect = document.getElementById("task-priority");
 
   addTaskBtn.addEventListener("click", () => {
     currentTaskId = null;
@@ -56,6 +57,10 @@ export function setupAddTaskModal() {
     document.getElementById("task-desc").value = "";
     document.getElementById("task-status").value = "todo";
 
+    // Load last saved priority from localStorage
+    const savedPriority = localStorage.getItem("taskPriority");
+    prioritySelect.value = savedPriority || "low";
+
     const submitBtn = document.getElementById("submit-task-btn");
     if (submitBtn) submitBtn.textContent = "Create Task";
 
@@ -64,6 +69,11 @@ export function setupAddTaskModal() {
 
     modal.showModal();
   });
+
+  // Save priority to localStorage whenever changed
+  prioritySelect.addEventListener("change", () => {
+    localStorage.setItem("taskPriority", prioritySelect.value);
+  });v
 
   deleteBtn.addEventListener("click", () => {
     if (!currentTaskId) return;
