@@ -138,4 +138,4 @@ export function setupAddTaskModal() {
   modal.close();
   currentTaskId = null;
 });
-
+}
