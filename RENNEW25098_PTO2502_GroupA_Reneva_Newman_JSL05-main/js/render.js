@@ -2,6 +2,13 @@
 
 import { openTaskModal } from "./modal.js";
 
+// Priority rank mapping: higher number = higher urgency
+const priorityRank = {
+  high: 3,
+  medium: 2,
+  low: 1
+};
+
 /**
  * Create a DOM element representing a single task.
  * @param {Object} task - Task object with id, title, status, and priority.
