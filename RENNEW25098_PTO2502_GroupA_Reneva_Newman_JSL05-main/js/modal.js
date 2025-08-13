@@ -14,12 +14,14 @@ export function openTaskModal(task) {
   const titleInput = document.getElementById("task-title");
   const descInput = document.getElementById("task-desc");
   const statusSelect = document.getElementById("task-status");
+  const prioritySelect = document.getElementById("task-priority");
   const submitBtn = document.getElementById("submit-task-btn");
   const deleteBtn = document.getElementById("delete-task-btn");
 
   titleInput.value = task.title;
   descInput.value = task.description;
   statusSelect.value = task.status;
+  prioritySelect.value = task.priority || "low";
   if (submitBtn) submitBtn.textContent = "Update Task";
 
   currentTaskId = task.id;
@@ -49,6 +51,20 @@ export function setupAddTaskModal() {
   const modal = document.getElementById("task-modal");
   const prioritySelect = document.getElementById("task-priority");
 
+  // --- Load saved priority on page load ---
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedPriority = localStorage.getItem("taskPriority");
+    if (savedPriority) {
+      prioritySelect.value = savedPriority;
+    }
+  });
+
+  // --- Save priority whenever it changes ---
+  prioritySelect.addEventListener("change", () => {
+    localStorage.setItem("taskPriority", prioritySelect.value);
+  });
+
+  // Open Add Task modal
   addTaskBtn.addEventListener("click", () => {
     currentTaskId = null;
     taskForm.reset();
@@ -57,7 +73,7 @@ export function setupAddTaskModal() {
     document.getElementById("task-desc").value = "";
     document.getElementById("task-status").value = "todo";
 
-    // Load last saved priority from localStorage
+    // Load last saved priority when opening the modal
     const savedPriority = localStorage.getItem("taskPriority");
     prioritySelect.value = savedPriority || "low";
 
@@ -70,11 +86,7 @@ export function setupAddTaskModal() {
     modal.showModal();
   });
 
-  // Save priority to localStorage whenever changed
-  prioritySelect.addEventListener("change", () => {
-    localStorage.setItem("taskPriority", prioritySelect.value);
-  });v
-
+  // Delete task
   deleteBtn.addEventListener("click", () => {
     if (!currentTaskId) return;
 
@@ -89,12 +101,14 @@ export function setupAddTaskModal() {
     currentTaskId = null;
   });
 
+  // Submit form (create or update task)
   taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const title = document.getElementById("task-title").value.trim();
     const description = document.getElementById("task-desc").value.trim();
     const status = document.getElementById("task-status").value;
+    const priority = prioritySelect.value; // capture priority
     if (!title || !status) return;
 
     const tasks = loadTasks();
@@ -105,6 +119,7 @@ export function setupAddTaskModal() {
         tasks[taskIndex].title = title;
         tasks[taskIndex].description = description;
         tasks[taskIndex].status = status;
+        tasks[taskIndex].priority = priority; // save priority per task
       }
     } else {
       const newTask = {
@@ -112,6 +127,7 @@ export function setupAddTaskModal() {
         title,
         description,
         status,
+        priority, // save priority for new task
       };
       tasks.push(newTask);
     }
@@ -123,4 +139,3 @@ export function setupAddTaskModal() {
     currentTaskId = null;
   });
 }
-
