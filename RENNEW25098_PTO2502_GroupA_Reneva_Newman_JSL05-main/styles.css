@@ -1,8 +1,9 @@
+
 /* ========================
    Global & Root Variables
 ======================== */
 * {
-  box-sizing: border-box; /* Ensures padding and border are included in total element size */
+  box-sizing: border-box; /* Include padding/border in total element size */
 }
 
 :root {
@@ -10,8 +11,8 @@
   --secondary-color: #f4f7fd;
   --primary-font-color: #000000;
   --secondary-font-color: #828fa3;
-  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
-  --sidebar-width: 300px; /* Sidebar fixed width */
+  --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015);
+  --sidebar-width: 300px;
 }
 
 /* ================
@@ -19,13 +20,13 @@
 ================= */
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
-  display: flex; /* Allow layout to span horizontally */
+  display: flex;
   flex-direction: row;
   width: 100%;
   min-height: 100vh;
   margin: 0;
   background-color: var(--secondary-color);
-  font-size: 1rem; /* Base font size for rem scaling */
+  font-size: 1rem;
 }
 
 /* ================
@@ -34,7 +35,7 @@ body {
 .side-bar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Added */
+  justify-content: space-between;
   background-color: var(--primary-color);
   border-right: 1px solid #e4ebfa;
   width: var(--sidebar-width);
@@ -45,52 +46,54 @@ body {
   z-index: 100;
   transform: translateX(0);
   transition: transform 0.3s ease;
-  padding: 1rem 0 20px 0; /* Updated padding: keep top and bottom space */
+  padding: 1rem 0 20px 0;
+  overflow-y: auto;
 }
 
+/* Sidebar hidden */
+.side-bar.hide,
+.side-bar.sidebar-hidden {
+  transform: translateX(calc(-1 * var(--sidebar-width)));
+}
+
+/* Sidebar top content group */
+.sidebar-top-group,
 .theme-hide-wrapper {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 90%;
   margin: 0 auto;
-  flex-shrink: 0;
 }
 
-.sidebar-top-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* spacing between logo and nav */
-}
-
-
-/* Sidebar hidden */
-.side-bar.hide {
-  transform: translateX(calc(-1 * var(--sidebar-width)));
-}
-
-/* Push main layout right by sidebar width when sidebar is visible */
-/* Base layout - no sidebar gap */
+/* Layout shifts when sidebar toggled */
 #layout {
-    overflow-x: hidden;
-    margin-left: 0; /* Default flush position */
-    flex: 1 1 0%;
-    transition: margin-left 0.3s ease;
+  flex: 1 1 0%;
+  overflow-x: hidden;
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s ease;
 }
 
-/* When sidebar is open */
-.sidebar-open #layout {
-    margin-left: var(--sidebar-width); /* Push over by sidebar width */
+/* Layout shift when sidebar hidden */
+.sidebar-hidden ~ #layout {
+  margin-left: 0;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  #layout {
+    margin-left: 0 !important;
+  }
 }
 
 
-/* Hide Sidebar button pinned to bottom inside sidebar */
+/* Sidebar toggle buttons */
 #hide-sidebar-btn {
-  margin-top: auto; /* push to bottom */
+  margin-top: auto;
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #F4F7FD;
+  background-color: #f4f7fd;
   border: none;
   padding: 12px;
   font-size: 1rem;
@@ -99,10 +102,9 @@ body {
   flex-shrink: 0;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   position: sticky;
-  bottom: 20px; /* ensure visible at bottom */
+  bottom: 20px;
 }
 
-/* Show Sidebar button fixed at bottom left */
 .show-sidebar-btn {
   position: fixed;
   bottom: 20px;
@@ -116,17 +118,16 @@ body {
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   user-select: none;
   z-index: 1000;
-  display: none; /* hidden initially */
+  display: none;
 }
 
-/* Container aligns toggle above hide button with same width */
+/* Theme toggle */
 #theme-toggle-container {
   width: 90%;
   margin: 0 auto 12px auto;
   flex-shrink: 0;
 }
 
-/* The toggle switch label */
 .theme-switch {
   position: relative;
   display: flex;
@@ -134,7 +135,7 @@ body {
   justify-content: space-between;
   width: 100%;
   height: 48px;
-  background-color: var(--secondary-color); /* #F4F7FD light bg */
+  background-color: var(--secondary-color);
   border-radius: 4px;
   padding: 0 12px;
   cursor: pointer;
@@ -142,14 +143,11 @@ body {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-/* Sun and Moon icons styling */
 .theme-switch .sun,
 .theme-switch .moon {
   font-size: 1.25rem;
-  flex-shrink: 0;
 }
 
-/* Hide the native checkbox */
 .theme-switch input[type="checkbox"] {
   opacity: 0;
   width: 0;
@@ -157,18 +155,16 @@ body {
   position: absolute;
 }
 
-/* The slider track */
 .theme-switch .slider {
   position: relative;
   flex-grow: 1;
   height: 24px;
-  background-color: #635FC7; /* default light mode bg */
+  background-color: #635FC7;
   border-radius: 12px;
   margin: 0 10px;
   transition: background-color 0.3s ease;
 }
 
-/* The circle knob */
 .theme-switch .slider::before {
   content: "";
   position: absolute;
@@ -176,51 +172,44 @@ body {
   width: 24px;
   left: 0;
   top: 0;
-  background-color: white; /* white knob for light mode */
+  background-color: white;
   border-radius: 50%;
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-/* Checked (dark mode) styles */
 .theme-switch input:checked + .slider {
-  background-color: #ffffff; /* slider track changes to white in dark mode */
+  background-color: #ffffff;
 }
 
 .theme-switch input:checked + .slider::before {
-  background-color: #635FC7; /* knob changes to purple in dark mode */
+  background-color: #635FC7;
   transform: translateX(100%);
 }
 
-/* ================
-   Other styles from your original CSS
-================= */
-
-/* Side Logo */
+/* ======================
+   Logo and Nav
+======================= */
 #side-logo-div {
-  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  margin: 33px 113px 54px 34px;
   display: flex;
   justify-content: flex-start;
 }
 
 #logo {
-  width: 100%; /* Make logo responsive within container */
+  width: 100%;
 }
 
-/* Boards navigation */
 .boards-nav-links-div {
   display: flex;
   flex-direction: column;
   color: var(--primary-font-color);
 }
 
-#headline-sidepanel {
-  padding: 0 12px 0 50px; /* Aligns section content from left and right */
-}
-
-h4 {
+#headline-sidepanel h4 {
   color: var(--secondary-font-color);
   font-size: 0.75rem;
-  letter-spacing: 0.125rem; /* Makes heading more spaced */
+  letter-spacing: 0.125rem;
+  margin: 0;
 }
 
 /* Board buttons */
@@ -228,21 +217,23 @@ h4 {
   font-family: inherit;
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between icon and text */
-  background-color: #635fc7;
+  gap: 10px;
+  background-color: #635FC7;
   color: #fff;
   border: none;
-  border-radius: 0 100px 100px 0; /* Pill shape only on right side */
+  border-radius: 0 100px 100px 0;
   height: 48px;
   width: 276px;
   padding: 28px 12px 28px 50px;
   font-size: 0.9375rem;
   font-weight: bold;
   cursor: pointer;
-  overflow: hidden; /* Prevents overflowed text/icons from showing */
+  overflow: hidden;
 }
 
-/* Header Section */
+/* ==================
+   Header
+=================== */
 header {
   display: flex;
   align-items: center;
@@ -263,21 +254,22 @@ header {
 }
 
 .logo-mobile {
-  display: none; /* Hidden on desktop; shown on smaller screens */
+  display: none;
 }
 
-/* Board Columns */
+/* ==================
+   Card Columns
+=================== */
 .container {
   display: flex;
   flex-direction: column;
   padding-left: 35px;
-  box-sizing: border-box;
 }
 
 .card-column-main {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 304px)); /* 3 columns with min size */
-  gap: 8px; /* Space between columns */
+  grid-template-columns: repeat(3, minmax(0, 304px));
+  gap: 8px;
 }
 
 .column-div {
@@ -291,7 +283,7 @@ header {
 .column-head-div {
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between dot and column title */
+  gap: 10px;
 }
 
 .columnHeader {
@@ -305,27 +297,16 @@ header {
 .dot {
   height: 15px;
   width: 15px;
-  border-radius: 50%; /* Make it circular */
+  border-radius: 50%;
   display: inline-block;
 }
 
-#todo-dot {
-  background-color: #49c4e5;
-}
+#todo-dot { background-color: #49c4e5; }
+#doing-dot { background-color: #8471f2; }
+#done-dot { background-color: #219c90; }
 
-#doing-dot {
-  background-color: #8471f2;
-}
-
-#done-dot {
-  background-color: #219c90;
-}
-
-/* Task Cards */
-.tasks-container {
-  display: flex;
-  flex-direction: column;
-}
+/* Tasks */
+.tasks-container { display: flex; flex-direction: column; }
 
 .task-div {
   display: flex;
@@ -337,19 +318,18 @@ header {
   color: var(--primary-font-color);
   border-radius: 12px;
   box-shadow: var(--primary-box-shadow);
-  cursor: pointer; /* Indicate it's clickable */
+  cursor: pointer;
   margin-bottom: 20px;
   font-size: 0.9375rem;
   font-weight: bold;
 }
 
 /* Headings */
-h2 {
-  font-size: 1.5rem;
-  margin: 0;
-}
+h2 { font-size: 1.5rem; margin: 0; }
 
-/* Modal Styles */
+/* ==================
+   Modals
+=================== */
 dialog {
   position: fixed;
   border: none;
@@ -358,11 +338,8 @@ dialog {
   background: none;
 }
 
-#task-modal::backdrop {
-  background: rgba(0, 0, 0, 0.3);
-}
-
-#task-modal {
+#task-modal,
+dialog#task-modal {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -40%);
@@ -370,282 +347,56 @@ dialog {
   width: 90%;
   max-width: 600px;
   padding: 24px;
-  background-color: #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Modal header */
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.close-modal-btn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  font-weight: bold;
-  color: #635fc7;
-}
-
-/* ==================
-   Responsive Styles
-=================== */
-@media (max-width: 768px) {
-  /* Sidebar hides by default on mobile */
-  .side-bar {
-    transform: translateX(calc(-1 * var(--sidebar-width)));
-    position: fixed;
-    z-index: 1000;
-  }
-
-  /* Show Sidebar button visible on mobile */
-  .show-sidebar-btn {
-    display: block;
-  }
-
-  /* Layout fills full width */
-  #layout {
-    margin-left: 0 !important;
-  }
-}
-
-/* Modal base */
-dialog#task-modal {
-  width: 90%;
-  max-width: 480px;
-  border-radius: 8px;
-  padding: 24px;
-  border: none;
   background-color: var(--primary-color, #fff);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10000;
 }
 
-#task-modal::backdrop {
-  background-color: rgba(0, 0, 0, 0.3);
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.25);
+  backdrop-filter: blur(2px);
 }
 
-/* Modal header */
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.modal-header h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
-  color: var(--primary-font-color, #000);
-}
-
-.close-btn {
-  font-size: 1.5rem;
-  font-weight: 700;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: #635fc7;
-}
-
-/* Form elements */
-/* Make labels on top and inputs stacked vertically inside modal */
-#task-form {
-  display: flex;
-  flex-direction: column;  /* stack vertically */
-  gap: 16px;               /* space between fields */
-}
-
-#task-form label {
-  display: block;           /* labels full width on top */
-  font-weight: 700;
-  font-size: 0.75rem;
-  color: var(--secondary-font-color, #828fa3);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 8px;       /* space below label */
-}
-
-#task-form input[type="text"],
-#task-form textarea,
-#task-form select {
-  width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #828fa3;
-  border-radius: 4px;
-  font-family: inherit;
-  font-size: 1rem;
-  color: var(--primary-font-color, #000);
-  background-color: var(--secondary-color, #f4f7fd);
-  resize: none;
-  box-sizing: border-box;
-  margin-bottom: 0; /* remove extra margin because gap in container */
-}
-
-/* Placeholder color */
-#task-form input::placeholder,
-#task-form textarea::placeholder {
-  color: #828fa3;
-}
-
-/* Buttons */
-.submit-task-btn,
-.delete-task-btn {
-  cursor: pointer;
-  border: none;
-  border-radius: 24px;
-  padding: 12px 20px;
-  font-weight: 700;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
-}
-
-.submit-task-btn {
-  background-color: #635fc7;
-  color: #fff;
-  margin-right: 10px;
-}
-
-.submit-task-btn:hover {
-  background-color: #a8a4ff;
-}
-
-.delete-task-btn {
-  background-color: #ea5555;
-  color: white;
-  display: none; /* hidden initially, only shows when editing */
-}
-
-.delete-task-btn:hover {
-  background-color: #ff9898;
-}
-
-/* Align buttons container */
-#task-form-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-/* Add New Task button */
-#add-task-btn {
-  background-color: #635FC7; /* purple background */
-  color: white;              /* white text */
-  padding: 14px 28px;        /* bigger padding */
-  font-size: 16px;           /* bigger font */
-  border: none;              /* no border */
-  border-radius: 6px;        /* rounded corners */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#add-task-btn:hover {
-  background-color: #7c72e8;
-}
-
-/* Desktop sidebar styles (default) */
-.side-bar {
-  position: static;  /* or whatever desktop style */
-  width: 280px;
-  height: 100vh;
-  background-color: var(--sidebar-bg, #fff);
-  box-shadow: none;
-  transform: none;
-  transition: none;
-  overflow-y: auto;
-  z-index: auto;
-}
-
-/* Hide desktop sidebar control buttons on mobile */
-@media (max-width: 768px) {
-  #hide-sidebar-btn,
-  #show-sidebar-btn {
-    display: none !important;
-  }
-}
-
-/* Mobile sidebar styles */
+/* ==========================
+   Media Queries
+=========================== */
 @media (max-width: 768px) {
   .side-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 50vh;
-    width: 280px;
-    background-color: var(--sidebar-bg, #fff);
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 1500;
-    overflow-y: auto;
-    padding-bottom: 60px; /* if needed */
+    position: fixed;
+    z-index: 999;
   }
 
   .side-bar.mobile-active {
     transform: translateX(0);
   }
 
-  /* Logo styles */
-  .logo-mobile {
-    width: 40px;
-    height: auto;
-    cursor: pointer;
-    display: block;
+  #hide-sidebar-btn {
+    display: none !important;
   }
 
-  /* Hide the Launch Career text on mobile */
-  .header-board-name {
-    display: none;
+  .show-sidebar-btn {
+    display: block !important;
   }
 
-  /* Header padding adjustment */
-  .header-name-div {
-    padding: 5px;
-  }
-
-  /* Make main content stack vertically on mobile */
   .card-column-main {
     display: flex;
     flex-direction: column;
-    gap: 16px;
   }
+
+  #layout {
+    margin-left: 0 !important;
+  }
+
+  .logo-mobile { display: block; }
+  .logo-desktop { display: none; }
 }
 
-/* Desktop sidebar - visible by default */
-.side-bar {
-  display: flex; /* Ensure visible on desktop */
-  position: fixed;
-  width: var(--sidebar-width);
-  height: 100vh;
-  /* Other styles you already have */
-  transition: margin-left 0.3s ease, transform 0.3s ease;
-}
-
-/* When sidebar is hidden on desktop */
-.side-bar.sidebar-hidden {
-  margin-left: calc(-1 * var(--sidebar-width));
-  /* Or alternatively: transform: translateX(calc(-1 * var(--sidebar-width))); */
-}
-
-/* Default main content on desktop */
-#layout {
-  margin-left: var(--sidebar-width);
-  transition: margin-left 0.3s ease;
-}
-
-/* When sidebar is hidden on desktop */
-.sidebar-hidden ~ #layout {
-  margin-left: 0;
-}
-
-/* ===== Dark Theme Overrides ===== */
+/* ==========================
+   Dark Theme
+=========================== */
 .dark-theme {
   --sidebar-bg: #2b2c37;
   --secondary-color: #20212c;
@@ -654,81 +405,5 @@ dialog#task-modal {
   --card-bg: #2b2c37;
   --dot-todo: #49c4e5;
   --dot-doing: #8471f2;
-  --dot-done: #67e2ae;
+  --dot-done: #219c90;
 }
-
-/* Dark theme general body */
-.dark-theme body {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
-}
-
-/* Dark theme header bar at top */
-.dark-theme header {
-  background-color: var(--header-bg);
-  color: var(--text-color);
-}
-
-/* Sidebar background and text */
-.dark-theme .side-bar {
-  background-color: #635FC7; /* Your requested purple */
-  color: var(--text-color);
-}
-
-/* Hide Sidebar button styling */
-.dark-theme #hide-sidebar-btn {
-  background-color: #635FC7;
-  color: var(--text-color);
-  box-shadow: none;
-}
-
-/* Show Sidebar button styling */
-.dark-theme .show-sidebar-btn {
-  background-color: #635FC7;
-  color: var(--text-color);
-  box-shadow: none;
-}
-
-/* Toggle switch background track */
-.dark-theme .theme-switch {
-  background-color: var(--secondary-color);
-}
-
-/* Toggle slider background in light mode */
-.dark-theme .theme-switch .slider {
-  background-color: #635FC7;
-}
-
-/* Toggle slider background when checked (dark mode) */
-.dark-theme .theme-switch input:checked + .slider {
-  background-color: #ffffff;
-}
-
-/* Toggle knob color and position when checked */
-.dark-theme .theme-switch input:checked + .slider::before {
-  background-color: #635FC7;
-  transform: translateX(100%);
-}
-
-/* ----------------------
-   Task Priority Dots
----------------------- */
-.task-div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  background-color: #f9f9f9;
-}
-
-.priority-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
