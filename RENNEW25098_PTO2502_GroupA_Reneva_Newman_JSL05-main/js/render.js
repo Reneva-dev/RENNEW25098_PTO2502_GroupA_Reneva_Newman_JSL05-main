@@ -39,6 +39,13 @@ function createTaskElement(task) {
     <span class="priority-dot" style="background-color: ${dotColor};" title="${task.priority} priority"></span>
   `;
 
+  // Fade-in animation
+  taskDiv.style.opacity = 0;
+  setTimeout(() => {
+    taskDiv.style.transition = "opacity 0.3s ease-in";
+    taskDiv.style.opacity = 1;
+  }, 10);
+
   taskDiv.addEventListener("click", () => openTaskModal(task));
 
   return taskDiv;
@@ -64,15 +71,37 @@ export function clearExistingTasks() {
 }
 
 /**
- * Render tasks in the UI.
+ * Render tasks in the UI, sorted by priority.
  * @param {Array<Object>} tasks - List of task objects.
  */
 export function renderTasks(tasks) {
-  tasks.forEach((task) => {
-    const container = getTaskContainerByStatus(task.status);
-    if (container) {
+  // Group tasks by status
+  const tasksByStatus = {
+    todo: [],
+    doing: [],
+    done: []
+  };
+
+  tasks.forEach(task => {
+    if (tasksByStatus[task.status]) {
+      tasksByStatus[task.status].push(task);
+    }
+  });
+
+  // Clear existing tasks
+  clearExistingTasks();
+
+  // Sort by priority and append
+  Object.keys(tasksByStatus).forEach(status => {
+    const container = getTaskContainerByStatus(status);
+    if (!container) return;
+
+    // Sort tasks in descending order of priority
+    tasksByStatus[status].sort((a, b) => priorityRank[b.priority] - priorityRank[a.priority]);
+
+    tasksByStatus[status].forEach(task => {
       const taskElement = createTaskElement(task);
       container.appendChild(taskElement);
-    }
+    });
   });
 }
