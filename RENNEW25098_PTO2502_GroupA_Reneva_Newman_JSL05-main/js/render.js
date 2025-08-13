@@ -4,14 +4,33 @@ import { openTaskModal } from "./modal.js";
 
 /**
  * Create a DOM element representing a single task.
- * @param {Object} task - Task object with id, title, and status.
+ * @param {Object} task - Task object with id, title, status, and priority.
  * @returns {HTMLElement} The task's DOM element.
  */
 function createTaskElement(task) {
   const taskDiv = document.createElement("div");
   taskDiv.className = "task-div";
-  taskDiv.textContent = task.title;
   taskDiv.dataset.taskId = task.id;
+
+  // Determine dot color based on priority
+  let dotColor;
+  switch (task.priority) {
+    case "high":
+      dotColor = "red";
+      break;
+    case "medium":
+      dotColor = "orange";
+      break;
+    case "low":
+    default:
+      dotColor = "green";
+  }
+
+  // Flex layout: title left, dot right
+  taskDiv.innerHTML = `
+    <span class="task-title">${task.title}</span>
+    <span class="priority-dot" style="background-color: ${dotColor};" title="${task.priority} priority"></span>
+  `;
 
   taskDiv.addEventListener("click", () => openTaskModal(task));
 
