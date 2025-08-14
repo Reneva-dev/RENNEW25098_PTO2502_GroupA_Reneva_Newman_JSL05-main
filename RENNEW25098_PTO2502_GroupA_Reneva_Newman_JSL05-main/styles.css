@@ -1,4 +1,3 @@
-
 /* ========================
    Global & Root Variables
 ======================== */
@@ -753,8 +752,9 @@ dialog#task-modal {
 
 /* Dark mode logo */
 .dark-theme #logo {
-  content: url('./assets/logo-dark.svg'); /* dark-mode SVG with transparent background */
+  content: url('./assets/logo-light.svg'); 
 }
+
 
 
 /* ----------------------
