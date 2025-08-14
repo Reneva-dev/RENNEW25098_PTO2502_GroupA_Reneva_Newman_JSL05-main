@@ -29,176 +29,10 @@ body {
   font-size: 1rem; /* Base font size for rem scaling */
 }
 
-/* ================
-   Sidebar Layout
-================= */
-.side-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Added */
-  background-color: var(--primary-color);
-  border-right: 1px solid #e4ebfa;
-  width: var(--sidebar-width);
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  transform: translateX(0);
-  transition: transform 0.3s ease;
-  padding: 1rem 0 20px 0; /* Updated padding: keep top and bottom space */
-}
+/* ------------------------- */
+/* SIDE LOGO & SIDEBAR STYLES */
+/* ------------------------- */
 
-.theme-hide-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  width: 90%;
-  margin: 0 auto;
-  flex-shrink: 0;
-}
-
-.sidebar-top-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* spacing between logo and nav */
-}
-
-
-/* Sidebar hidden */
-.side-bar.hide {
-  transform: translateX(calc(-1 * var(--sidebar-width)));
-}
-
-/* Push main layout right by sidebar width when sidebar is visible */
-/* Base layout - no sidebar gap */
-#layout {
-    overflow-x: hidden;
-    margin-left: 0; /* Default flush position */
-    flex: 1 1 0%;
-    transition: margin-left 0.3s ease;
-}
-
-/* When sidebar is open */
-.sidebar-open #layout {
-    margin-left: var(--sidebar-width); /* Push over by sidebar width */
-}
-
-
-/* Hide Sidebar button pinned to bottom inside sidebar */
-#hide-sidebar-btn {
-  margin-top: auto; /* push to bottom */
-  width: 90%;
-  margin-left: 0;
-  margin-right: auto;
-  background-color: #F4F7FD;
-  border: none;
-  padding: 12px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 4px;
-  flex-shrink: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  position: sticky;
-  bottom: 20px; /* ensure visible at bottom */
-}
-
-/* Show Sidebar button fixed at bottom left */
-.show-sidebar-btn {
-  position: fixed;
-  bottom: 20px;
-  left: 0;
-  background: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-  border-radius: 0 4px 4px 0;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
-  user-select: none;
-  z-index: 1000;
-  display: none; /* hidden initially */
-}
-
-/* Container aligns toggle above hide button with same width */
-#theme-toggle-container {
-  width: 90%;
-  margin: 0 auto 12px auto;
-  flex-shrink: 0;
-}
-
-/* The toggle switch label */
-.theme-switch {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* center all items instead of space-between */
-  width: auto;             /* shrink container to fit content */
-  height: 36px;            /* optional smaller height */
-  background-color: var(--secondary-color);
-  border-radius: 4px;
-  padding: 0 8px;          /* smaller horizontal padding */
-  cursor: pointer;
-  user-select: none;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  gap: 4px;                /* space between icons and slider */
-}
-
-/* Sun and Moon icons styling */
-.theme-switch .sun,
-.theme-switch .moon {
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-
-/* Hide the native checkbox */
-.theme-switch input[type="checkbox"] {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-}
-
-/* The slider track */
-.theme-switch .slider {
-  position: relative;
-  flex-grow: 0;
-  height: 20px;
-  background-color: #635FC7; /* default light mode bg */
-  border-radius: 12px;
-  margin: 0 5px;
-  transition: background-color 0.3s ease;
-  width: 40px;          /* smaller slider width */
-}
-
-/* The circle knob */
-.theme-switch .slider::before {
-  content: "";
-  position: absolute;
-  height: 24px;
-  width: 24px;
-  left: 0;
-  top: 0;
-  background-color: white; /* white knob for light mode */
-  border-radius: 50%;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-/* Checked (dark mode) styles */
-.theme-switch input:checked + .slider {
-  background-color: #ffffff; /* slider track changes to white in dark mode */
-}
-
-.theme-switch input:checked + .slider::before {
-  background-color: #635FC7; /* knob changes to purple in dark mode */
-  transform: translateX(100%);
-}
-
-/* ================
-   Other styles from your reverted CSS
-================= */
-
-/* -------------------------- */
 /* Side Logo Container */
 #side-logo-div {
   margin: 33px 34px 54px 34px; /* spacing around logo */
@@ -216,37 +50,52 @@ body {
   cursor: pointer;     /* indicate clickable */
 }
 
-/* -------------------------- */
-/* Base Sidebar */
-#side-bar-div {
-  height: 100vh;       /* full viewport height */
-  width: 240px;        /* normal sidebar width */
-  transition: width 0.3s ease, height 0.3s ease; /* smooth animation */
-  overflow: hidden;    /* prevent content spill */
-}
-
-/* Mini Sidebar - desktop */
+/* Mini Sidebar (Desktop) */
 #side-bar-div.mini {
-  width: 60px;          /* collapsed width */
+  width: 60px;          /* collapsed sidebar width */
 }
 
-/* Mini Sidebar content adjustments */
 #side-bar-div.mini .sidebar-item-label {
-  display: none;        /* hide text when collapsed */
+  display: none; /* hide text when collapsed */
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  #side-bar-div.mini {
-    width: 250px;       /* adjust mini width on mobile */
-    height: auto;       /* shrink height to content */
-    overflow: hidden;   /* hide extra content */
-  }
+#side-bar-div.mini .sidebar-top-group { 
+  overflow: hidden; 
 }
 
+/* ------------------------- */
+/* MOBILE FULL-SCREEN OVERLAY */
+/* ------------------------- */
 
+#side-bar-div.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;       /* full viewport height */
+  background-color: #2c2c3a; /* or your dark sidebar color */
+  z-index: 1000;       /* above page content */
+  transform: translateX(-100%); /* hide off-screen initially */
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;    /* scroll if content overflows */
+}
 
+#side-bar-div.overlay.active {
+  transform: translateX(0); /* slide in */
+}
 
+/* Close button for overlay */
+#side-bar-close-btn {
+  align-self: flex-end;
+  margin: 16px;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
 
 /* Boards navigation */
 .boards-nav-links-div {
