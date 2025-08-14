@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       document.body.classList.remove("dark-theme");
       themeToggleCheckbox.checked = false;
-      if (logo) logo.src = './assets/logo-light.svg';
+      if (logo) logo.src = './assets/logo.svg';
     }
     localStorage.setItem("theme", theme);
   }
