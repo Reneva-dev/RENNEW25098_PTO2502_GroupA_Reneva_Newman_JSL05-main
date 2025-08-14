@@ -120,6 +120,97 @@ body {
   display: none; /* hidden initially */
 }
 
+/* Container aligns toggle above hide button with same width */
+#theme-toggle-container {
+  width: 90%;
+  margin: 0 auto 12px auto;
+  flex-shrink: 0;
+}
+
+/* The toggle switch label */
+.theme-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center all items instead of space-between */
+  width: auto;             /* shrink container to fit content */
+  height: 36px;            /* optional smaller height */
+  background-color: var(--secondary-color);
+  border-radius: 4px;
+  padding: 0 8px;          /* smaller horizontal padding */
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  gap: 4px;                /* space between icons and slider */
+}
+
+/* Sun and Moon icons styling */
+.theme-switch .sun,
+.theme-switch .moon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+/* Hide the native checkbox */
+.theme-switch input[type="checkbox"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+/* The slider track */
+.theme-switch .slider {
+  position: relative;
+  flex-grow: 0;
+  height: 20px;
+  background-color: #635FC7; /* default light mode bg */
+  border-radius: 12px;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+  width: 40px;          /* smaller slider width */
+}
+
+/* The circle knob */
+.theme-switch .slider::before {
+  content: "";
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  left: 0;
+  top: 0;
+  background-color: white; /* white knob for light mode */
+  border-radius: 50%;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Checked (dark mode) styles */
+.theme-switch input:checked + .slider {
+  background-color: #ffffff; /* slider track changes to white in dark mode */
+}
+
+.theme-switch input:checked + .slider::before {
+  background-color: #635FC7; /* knob changes to purple in dark mode */
+  transform: translateX(100%);
+}
+
+/* ================
+   Other styles from your original CSS
+================= */
+
+/* Side Logo */
+#side-logo-div {
+  margin: 33px 0px 54px 34px; /* Spacing around logo */
+  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  display: flex;
+  justify-content: flex-start;
+  width: 150px;
+}
+
+#logo {
+  width: 120px;
+  height: auto; 
+}
 
 /* Boards navigation */
 .boards-nav-links-div {
@@ -688,7 +779,7 @@ dialog#task-modal {
   #add-task-btn span {
     display: none; /* hide original "+ Add New Task" text */
   }
-  
+
   #add-task-btn::before {
     content: "+";  /* insert just the plus */
   }
