@@ -195,17 +195,10 @@ body {
 }
 
 /* ================
-   Other styles from your original CSS
+   Other styles from your reverted CSS
 ================= */
 
-/* Side Logo */
-/* Side Logo Container */
-#side-logo-div {
-  margin: 33px 34px 54px 34px; /* Adjusted spacing */
-  display: flex;
-  justify-content: flex-start;
-}
-
+/* -------------------------- */
 /* Side Logo Container */
 #side-logo-div {
   margin: 33px 34px 54px 34px; /* spacing around logo */
@@ -223,15 +216,35 @@ body {
   cursor: pointer;     /* indicate clickable */
 }
 
-/* Mini Sidebar - hidden by default */
-#side-bar-div.mini {
-  width: 60px;          /* collapsed sidebar width */
+/* -------------------------- */
+/* Base Sidebar */
+#side-bar-div {
+  height: 100vh;       /* full viewport height */
+  width: 240px;        /* normal sidebar width */
+  transition: width 0.3s ease, height 0.3s ease; /* smooth animation */
+  overflow: hidden;    /* prevent content spill */
 }
 
-#side-bar-div.mini .sidebar-top-group {
-  /* optional: hide text labels when mini */
-  overflow: hidden;
+/* Mini Sidebar - desktop */
+#side-bar-div.mini {
+  width: 60px;          /* collapsed width */
 }
+
+/* Mini Sidebar content adjustments */
+#side-bar-div.mini .sidebar-item-label {
+  display: none;        /* hide text when collapsed */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #side-bar-div.mini {
+    width: 250px;       /* adjust mini width on mobile */
+    height: auto;       /* shrink height to content */
+    overflow: hidden;   /* hide extra content */
+  }
+}
+
+
 
 
 
