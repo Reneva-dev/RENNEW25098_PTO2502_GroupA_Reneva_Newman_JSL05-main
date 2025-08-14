@@ -686,7 +686,7 @@ dialog#task-modal {
 
 /* Sidebar background and text */
 .dark-theme .side-bar {
-  background-color: #635FC7; /* Your requested purple */
+  background-color: #3E3F4E ;
   color: var(--text-color);
 }
 
