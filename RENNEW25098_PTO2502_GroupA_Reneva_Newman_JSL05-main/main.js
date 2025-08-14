@@ -3,10 +3,6 @@ import { setupModalCloseHandler, setupAddTaskModal } from './js/modal.js';
 import { renderTasks, clearExistingTasks } from './js/render.js';
 import { fetchTasksFromAPI } from './js/api.js';
 
-/**
- * Display a message in the status message div.
- * @param {string} message - Message to show.
- */
 function setStatusMessage(message) {
   const statusEl = document.getElementById("status-message");
   if (statusEl) {
@@ -15,56 +11,37 @@ function setStatusMessage(message) {
   }
 }
 
-/**
- * Show a loading spinner or text while fetching tasks.
- */
-function showLoadingState() {
-  setStatusMessage("Loading tasks...");
-}
-
-/**
- * Hide loading state once tasks are ready.
- */
-function hideLoadingState() {
-  setStatusMessage("");
-}
-
-/**
- * Initialize the Kanban board with data from API or localStorage.
- */
 async function init() {
   const spinner = document.getElementById("loading-spinner");
   const statusEl = document.getElementById("status-message");
 
   // Show spinner and loading message
-  spinner.style.display = "flex";
-  statusEl.textContent = "Loading tasks...";
-  statusEl.style.display = "block";
+  if (spinner) spinner.style.display = "block";
+  setStatusMessage("Loading tasks...");
 
   let tasks = loadTasks();
 
-  if (!tasks || tasks.length === 0) {
-    try {
-      tasks = await fetchTasksFromAPI(); // Spinner is visible during this fetch
+  try {
+    if (!tasks || tasks.length === 0) {
+      tasks = await fetchTasksFromAPI();
       saveTasks(tasks);
-    } catch (error) {
-      statusEl.textContent = "Error fetching tasks.";
-      spinner.style.display = "none";
-      return;
     }
+  } catch (error) {
+    console.error(error);
+    setStatusMessage("Failed to load tasks.");
+    if (spinner) spinner.style.display = "none";
+    return;
   }
 
-  // Hide spinner and clear message once tasks are ready
-  spinner.style.display = "none";
-  statusEl.textContent = "";
-  statusEl.style.display = "none";
+  // Hide spinner/message
+  if (spinner) spinner.style.display = "none";
+  setStatusMessage("");
 
   clearExistingTasks();
   renderTasks(tasks);
   setupModalCloseHandler();
   setupAddTaskModal();
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
@@ -79,13 +56,14 @@ document.addEventListener("DOMContentLoaded", () => {
       sidebar.style.display = "none";
       showBtn.style.display = "block";
     });
+
     showBtn.addEventListener("click", () => {
       sidebar.style.display = "flex";
       showBtn.style.display = "none";
     });
   }
 
-  // Mobile sidebar toggle on logo click
+  // Mobile logo toggle
   const mobileLogo = document.getElementById("mobile-logo-toggle");
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
@@ -95,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // DARK MODE FUNCTIONALITY
+  // Theme toggle
   const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
   function applyTheme(theme) {
@@ -116,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggleCheckbox.addEventListener("change", () => {
       applyTheme(themeToggleCheckbox.checked ? "dark" : "light");
     });
-  } else {
-    console.warn("Theme toggle checkbox not found");
   }
 });
+
