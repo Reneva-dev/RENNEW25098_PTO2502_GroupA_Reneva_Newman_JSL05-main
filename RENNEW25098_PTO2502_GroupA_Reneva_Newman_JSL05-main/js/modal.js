@@ -10,7 +10,6 @@ let currentTaskId = null;
  */
 export function openTaskModal(task) {
   const modal = document.getElementById("task-modal");
-  const modalHeader = document.getElementById("modal-header-title");
   const titleInput = document.getElementById("task-title");
   const descInput = document.getElementById("task-desc");
   const statusSelect = document.getElementById("task-status");
@@ -18,18 +17,30 @@ export function openTaskModal(task) {
   const submitBtn = document.getElementById("submit-task-btn");
   const deleteBtn = document.getElementById("delete-task-btn");
 
-  titleInput.value = task.title;
-  descInput.value = task.description;
-  statusSelect.value = task.status;
-  prioritySelect.value = task.priority || "low";
+  // Select modal header
+  const modalHeader = document.querySelector("#task-modal .modal-header h3");
 
-  if (submitBtn) submitBtn.textContent = "Save changes";
-  if (modalHeader) modalHeader.textContent = "Update Task"; // Header text updated
-
-  currentTaskId = task.id;
-
-  // Show delete button when editing
-  if (deleteBtn) deleteBtn.style.display = "block";
+  if (task) {
+    // Editing existing task
+    titleInput.value = task.title;
+    descInput.value = task.description;
+    statusSelect.value = task.status;
+    prioritySelect.value = task.priority || "low";
+    submitBtn.textContent = "Save changes";
+    modalHeader.textContent = "Task";  // header changes for update
+    deleteBtn.style.display = "block";
+    currentTaskId = task.id;
+  } else {
+    // Adding new task
+    titleInput.value = "";
+    descInput.value = "";
+    statusSelect.value = "todo";
+    prioritySelect.value = localStorage.getItem("taskPriority") || "low";
+    submitBtn.textContent = "Create Task";
+    modalHeader.textContent = "Add New Task"; // header for new task
+    deleteBtn.style.display = "none";
+    currentTaskId = null;
+  }
 
   modal.showModal();
 }
