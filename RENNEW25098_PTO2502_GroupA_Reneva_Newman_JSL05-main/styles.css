@@ -30,37 +30,38 @@ body {
 }
 
 /* ------------------------- */
+/* ------------------------- */
 /* SIDE LOGO & SIDEBAR STYLES */
 /* ------------------------- */
 
 /* Side Logo Container */
 #side-logo-div {
-  margin: 33px 34px 54px 34px; /* spacing around logo */
+  margin: 33px 34px 54px 34px;
   display: flex;
   justify-content: flex-start;
-  align-items: center; /* vertically center logo */
+  align-items: center;
 }
 
 /* Sidebar Logo */
 #logo {
-  width: 120px;        /* fixed width */
-  max-width: 100%;     /* responsive scaling */
-  height: auto;        /* maintain aspect ratio */
-  display: block;      /* remove inline spacing */
-  cursor: pointer;     /* indicate clickable */
+  width: 120px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
 }
 
-/* Mini Sidebar (Desktop) */
+/* Desktop Mini Sidebar */
 #side-bar-div.mini {
-  width: 60px;          /* collapsed sidebar width */
+  width: 60px; /* collapsed width */
 }
 
 #side-bar-div.mini .sidebar-item-label {
-  display: none; /* hide text when collapsed */
+  display: none;
 }
 
-#side-bar-div.mini .sidebar-top-group { 
-  overflow: hidden; 
+#side-bar-div.mini .sidebar-top-group {
+  overflow: hidden;
 }
 
 /* Fullscreen Mini Sidebar for Mobile */
@@ -70,8 +71,8 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #fff; /* or your sidebar color */
-  z-index: 9999; /* on top of content */
+  background-color: #fff; /* adjust to match your sidebar */
+  z-index: 9999;
   overflow-y: auto;
   transition: transform 0.3s ease;
 }
@@ -81,11 +82,13 @@ body {
   position: absolute;
   top: 15px;
   right: 15px;
-  font-size: 24px;
+  font-size: 32px;
+  font-weight: bold;
   cursor: pointer;
+  z-index: 10000;
 }
 
-/* Optional: dim the background behind the sidebar */
+/* Optional: dim background behind sidebar */
 #side-bar-div.mobile-active::before {
   content: "";
   position: fixed;
@@ -97,40 +100,17 @@ body {
   z-index: -1;
 }
 
-
-/* ------------------------- */
-/* MOBILE FULL-SCREEN OVERLAY */
-/* ------------------------- */
-
-#side-bar-div.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;       /* full viewport height */
-  background-color: #2c2c3a; /* or your dark sidebar color */
-  z-index: 1000;       /* above page content */
-  transform: translateX(-100%); /* hide off-screen initially */
-  transition: transform 0.3s ease;
+/* Sidebar Items */
+.sidebar-item {
   display: flex;
-  flex-direction: column;
-  overflow-y: auto;    /* scroll if content overflows */
+  align-items: center;
+  padding: 10px 20px;
 }
 
-#side-bar-div.overlay.active {
-  transform: translateX(0); /* slide in */
+.sidebar-item-icon {
+  margin-right: 10px;
 }
 
-/* Close button for overlay */
-#side-bar-close-btn {
-  align-self: flex-end;
-  margin: 16px;
-  font-size: 1.5rem;
-  color: white;
-  cursor: pointer;
-  background: none;
-  border: none;
-}
 
 /* Boards navigation */
 .boards-nav-links-div {

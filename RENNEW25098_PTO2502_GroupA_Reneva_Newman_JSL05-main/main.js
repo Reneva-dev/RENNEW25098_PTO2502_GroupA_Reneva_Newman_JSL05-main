@@ -50,17 +50,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const showBtn = document.getElementById("show-sidebar-btn");
   const logo = document.getElementById("logo");
   const mobileLogo = document.getElementById("mobile-logo-toggle");
+  const closeBtn = sidebar.querySelector(".close-mini-btn");
 
-  // Desktop sidebar toggle on logo click
+  // -----------------------
+  // Desktop sidebar toggle
+  // -----------------------
   if (logo && sidebar) {
     logo.addEventListener("click", () => {
       if (window.innerWidth > 768) {
-        sidebar.classList.toggle("mini"); // collapse/expand sidebar on desktop
+        sidebar.classList.toggle("mini"); // collapse/expand sidebar
       }
     });
   }
 
-  // Sidebar toggle functionality (desktop hide/show buttons)
+  // -----------------------
+  // Sidebar hide/show buttons (desktop)
+  // -----------------------
   if (hideBtn && showBtn && sidebar) {
     hideBtn.addEventListener("click", () => {
       sidebar.style.display = "none";
@@ -73,25 +78,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Mobile sidebar toggle on logo click
+  // -----------------------
+  // Mobile sidebar toggle
+  // -----------------------
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
       if (window.innerWidth <= 768) {
-        sidebar.classList.toggle("mobile-active"); // show/hide sidebar on mobile
+        sidebar.classList.add("mobile-active"); // show fullscreen sidebar
       }
     });
   }
 
+  // -----------------------
+  // Mobile sidebar close button
+  // -----------------------
+  if (closeBtn && sidebar) {
+    closeBtn.addEventListener("click", () => {
+      sidebar.classList.remove("mobile-active");
+    });
+  }
+
+  // -----------------------
   // DARK MODE FUNCTIONALITY
+  // -----------------------
   const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
   function applyTheme(theme) {
     if (theme === "dark") {
       document.body.classList.add("dark-theme");
-      themeToggleCheckbox.checked = true;
+      if (themeToggleCheckbox) themeToggleCheckbox.checked = true;
     } else {
       document.body.classList.remove("dark-theme");
-      themeToggleCheckbox.checked = false;
+      if (themeToggleCheckbox) themeToggleCheckbox.checked = false;
     }
     localStorage.setItem("theme", theme);
   }
