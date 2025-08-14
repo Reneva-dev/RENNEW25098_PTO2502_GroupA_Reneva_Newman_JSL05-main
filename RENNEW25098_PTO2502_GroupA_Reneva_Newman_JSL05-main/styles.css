@@ -12,6 +12,8 @@
   --secondary-font-color: #828fa3;
   --primary-box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1015); /* Subtle shadow for card depth */
   --sidebar-width: 300px; /* Sidebar fixed width */
+  --input-bg: #f4f7fd;
+  --input-text-color: #000000;
 }
 
 /* ================
@@ -486,12 +488,13 @@ dialog#task-modal {
   border-radius: 4px;
   font-family: inherit;
   font-size: 1rem;
-  color: var(--primary-font-color, #000);
-  background-color: var(--secondary-color, #f4f7fd);
+  color: var(--input-text-color, #000);
+  background-color: var(--input-bg, #f4f7fd);
   resize: none;
   box-sizing: border-box;
-  margin-bottom: 0; /* remove extra margin because gap in container */
+  margin-bottom: 0;
 }
+
 
 /* Placeholder color */
 #task-form input::placeholder,
@@ -668,27 +671,46 @@ dialog#task-modal {
   --secondary-color: #20212c;
   --text-color: #ffffff;
   --header-bg: #2b2c37;
-  --card-bg: #2b2c37;
+  --card-bg: #ffffff;
   --dot-todo: #49c4e5;
   --dot-doing: #8471f2;
   --dot-done: #67e2ae;
   --input-bg: #ffffff;       /* White inputs in dark mode */
   --input-text-color: #808191; /* Grey text for input */
-  --task-activity-bg: #3e3f4e; /* Task activity background in dark mode */
+  --task-activity-bg: #ffffff; /* Task activity background in dark mode */
 }
+
+.dark-theme #task-form input[type="text"],
+.dark-theme #task-form textarea,
+.dark-theme #task-form select {
+  background-color: var(--input-bg) !important;
+  color: var(--input-text-color) !important;
+  border-color: #4b4d5e; /* optional: matches dark theme borders */
+}
+
+.dark-theme .task-activity,
+.dark-theme .tasks-container .task-div {
+  background-color: #3e3f4e;
+  color: #ffffff;
+}
+
 
 /* Placeholder color in dark mode */
 .dark-theme input::placeholder,
 .dark-theme textarea::placeholder {
   color: #808191; /* grey text */
   opacity: 1; /* ensure full visibility */
+
 }
 
 /* Task activity cards in dark mode */
 .dark-theme .task-activity,
 .dark-theme .tasks-container .task-card {
-  background-color: var(--task-activity-bg);
-  color: var(--text-color);
+  background-color: #ffffff;
+  color: #808191;
+  border: none!important;
+  box-shadow: none!important;
+  outline: none!important;
 }
 
 /* Dark theme general body */
@@ -755,8 +777,6 @@ dialog#task-modal {
   content: url('./assets/logo-light.svg'); 
 }
 
-
-
 /* ----------------------
    Task Priority Dots
 ---------------------- */
@@ -801,3 +821,10 @@ dialog#task-modal {
     content: "+";  /* insert just the plus */
   }
 }
+
+input, textarea {
+  background-color: white;
+  color: black; /* ensures text is visible */
+  border: 1px solid #ccc; /* optional: makes the border more visible */
+}
+
