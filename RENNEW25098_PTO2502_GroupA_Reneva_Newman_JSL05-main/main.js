@@ -50,10 +50,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const showBtn = document.getElementById("show-sidebar-btn");
   const logo = document.getElementById("logo");
   const mobileLogo = document.getElementById("mobile-logo-toggle");
-  const closeBtn = sidebar.querySelector(".close-mini-btn");
+
+  // Create mobile close button dynamically if not present
+  let closeBtn = sidebar.querySelector(".close-mini-btn");
+  if (!closeBtn) {
+    closeBtn = document.createElement("button");
+    closeBtn.className = "close-mini-btn";
+    closeBtn.textContent = "×";
+    sidebar.prepend(closeBtn);
+  }
 
   // -----------------------
-  // Desktop sidebar toggle
+  // Desktop sidebar toggle (mini)
   // -----------------------
   if (logo && sidebar) {
     logo.addEventListener("click", () => {
@@ -126,4 +134,15 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.warn("Theme toggle checkbox not found");
   }
+
+  // -----------------------
+  // Ensure sidebar buttons fixed at bottom
+  // -----------------------
+  const sidebarControls = document.querySelector("#side-bar-div .sidebar-controls");
+  if (sidebarControls) {
+    sidebarControls.style.position = "absolute";
+    sidebarControls.style.bottom = "20px";
+    sidebarControls.style.width = "100%";
+  }
 });
+
