@@ -1,11 +1,9 @@
 // storage.js
 
-import { initialTasks } from "./initialData.js";
-
 const STORAGE_KEY = "kanbanTasks";
 
 /**
- * Load tasks from localStorage or fallback to initial tasks.
+ * Load tasks from localStorage.
  * @returns {Array<Object>} Array of task objects.
  */
 export function loadTasks() {
@@ -13,8 +11,8 @@ export function loadTasks() {
   if (saved) {
     return JSON.parse(saved);
   } else {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialTasks));
-    return initialTasks;
+    // Return empty array if no tasks in localStorage
+    return [];
   }
 }
 
@@ -31,3 +29,4 @@ export function deleteTask(taskId) {
   tasks = tasks.filter(t => t.id !== taskId);
   saveTasks(tasks);
 }
+
