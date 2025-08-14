@@ -551,6 +551,18 @@ dialog#task-modal {
   background-color: #7c72e8;
 }
 
+/* Mobile: hide the text, keep only the plus sign */
+@media (max-width: 600px) {
+  #add-task-btn .btn-text {
+    display: none;
+  }
+  #add-task-btn {
+    padding: 14px;           /* make it more compact */
+    font-size: 20px;         /* slightly larger + */
+    border-radius: 50%;      /* round button look */
+  }
+}
+
 /* Desktop sidebar styles (default) */
 .side-bar {
   position: static;  /* or whatever desktop style */
