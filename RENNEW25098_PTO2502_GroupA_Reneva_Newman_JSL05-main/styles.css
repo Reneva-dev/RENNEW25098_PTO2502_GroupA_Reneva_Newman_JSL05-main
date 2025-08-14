@@ -680,7 +680,7 @@ dialog#task-modal {
 
 /* Dark theme header bar at top */
 .dark-theme header {
-  background-color: var(--header-bg);
+  background-color: #3e3f4e;
   color: var(--text-color);
 }
 
@@ -706,22 +706,22 @@ dialog#task-modal {
 
 /* Toggle switch background track */
 .dark-theme .theme-switch {
-  background-color: var(--secondary-color);
+  background-color: #635FC7;
 }
 
 /* Toggle slider background in light mode */
 .dark-theme .theme-switch .slider {
-  background-color: #635FC7;
+  background-color: #000000;
 }
 
 /* Toggle slider background when checked (dark mode) */
 .dark-theme .theme-switch input:checked + .slider {
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 /* Toggle knob color and position when checked */
 .dark-theme .theme-switch input:checked + .slider::before {
-  background-color: #635FC7;
+  background-color: #ffffff;
   transform: translateX(100%);
 }
 
