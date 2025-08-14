@@ -45,35 +45,11 @@ async function init() {
 document.addEventListener("DOMContentLoaded", () => {
   init();
 
+  // Sidebar toggle functionality (desktop hide/show buttons)
   const sidebar = document.getElementById("side-bar-div");
   const hideBtn = document.getElementById("hide-sidebar-btn");
   const showBtn = document.getElementById("show-sidebar-btn");
-  const logo = document.getElementById("logo");
-  const mobileLogo = document.getElementById("mobile-logo-toggle");
 
-  // Create mobile close button dynamically if not present
-  let closeBtn = sidebar.querySelector(".close-mini-btn");
-  if (!closeBtn) {
-    closeBtn = document.createElement("button");
-    closeBtn.className = "close-mini-btn";
-    closeBtn.textContent = "×";
-    sidebar.prepend(closeBtn);
-  }
-
-  // -----------------------
-  // Desktop sidebar toggle (mini)
-  // -----------------------
-  if (logo && sidebar) {
-    logo.addEventListener("click", () => {
-      if (window.innerWidth > 768) {
-        sidebar.classList.toggle("mini"); // collapse/expand sidebar
-      }
-    });
-  }
-
-  // -----------------------
-  // Sidebar hide/show buttons (desktop)
-  // -----------------------
   if (hideBtn && showBtn && sidebar) {
     hideBtn.addEventListener("click", () => {
       sidebar.style.display = "none";
@@ -86,38 +62,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // -----------------------
-  // Mobile sidebar toggle
-  // -----------------------
+  // Mobile sidebar toggle on app logo click
+  const mobileLogo = document.getElementById("mobile-logo-toggle");
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
       if (window.innerWidth <= 768) {
-        sidebar.classList.add("mobile-active"); // show fullscreen sidebar
+        sidebar.classList.toggle("mobile-active");
       }
     });
   }
 
-  // -----------------------
-  // Mobile sidebar close button
-  // -----------------------
-  if (closeBtn && sidebar) {
-    closeBtn.addEventListener("click", () => {
-      sidebar.classList.remove("mobile-active");
-    });
-  }
-
-  // -----------------------
   // DARK MODE FUNCTIONALITY
-  // -----------------------
   const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
   function applyTheme(theme) {
     if (theme === "dark") {
       document.body.classList.add("dark-theme");
-      if (themeToggleCheckbox) themeToggleCheckbox.checked = true;
+      themeToggleCheckbox.checked = true;
     } else {
       document.body.classList.remove("dark-theme");
-      if (themeToggleCheckbox) themeToggleCheckbox.checked = false;
+      themeToggleCheckbox.checked = false;
     }
     localStorage.setItem("theme", theme);
   }
@@ -134,15 +98,4 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.warn("Theme toggle checkbox not found");
   }
-
-  // -----------------------
-  // Ensure sidebar buttons fixed at bottom
-  // -----------------------
-  const sidebarControls = document.querySelector("#side-bar-div .sidebar-controls");
-  if (sidebarControls) {
-    sidebarControls.style.position = "absolute";
-    sidebarControls.style.bottom = "20px";
-    sidebarControls.style.width = "100%";
-  }
 });
-
