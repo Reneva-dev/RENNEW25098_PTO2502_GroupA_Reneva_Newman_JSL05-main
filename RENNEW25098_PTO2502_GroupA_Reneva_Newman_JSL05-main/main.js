@@ -73,31 +73,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // DARK MODE FUNCTIONALITY
-  const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
+const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      document.body.classList.add("dark-theme");
-      themeToggleCheckbox.checked = true;
-    } else {
-      document.body.classList.remove("dark-theme");
-      themeToggleCheckbox.checked = false;
-    }
-    localStorage.setItem("theme", theme);
-  }
-
-  if (themeToggleCheckbox) {
-    // Apply saved theme immediately
-    const savedTheme = localStorage.getItem("theme") || "light";
-    applyTheme(savedTheme);
-
-    // Toggle event listener
-    themeToggleCheckbox.addEventListener("change", () => {
-      applyTheme(themeToggleCheckbox.checked ? "dark" : "light");
-    });
+function applyTheme(theme) {
+  if (theme === "dark") {
+    document.body.classList.add("dark-theme");
+    themeToggleCheckbox.checked = true;
   } else {
-    console.warn("Theme toggle checkbox not found");
+    document.body.classList.remove("dark-theme");
+    themeToggleCheckbox.checked = false;
   }
-});
+  localStorage.setItem("theme", theme);
+}
 
+if (themeToggleCheckbox) {
+  // Apply saved theme immediately
+  const savedTheme = localStorage.getItem("theme") || "light";
+  applyTheme(savedTheme);
 
+  // Toggle event listener
+  themeToggleCheckbox.addEventListener("change", () => {
+    applyTheme(themeToggleCheckbox.checked ? "dark" : "light");
+  });
+} else {
+  console.warn("Theme toggle checkbox not found");
+}
+})
