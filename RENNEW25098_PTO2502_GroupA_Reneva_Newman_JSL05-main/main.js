@@ -49,29 +49,42 @@ async function init() {
   renderTasks(tasks);
   setupModalCloseHandler();
   setupAddTaskModal();
+
+  // Initialize dark mode from localStorage
+  const themeCheckbox = document.getElementById("theme-toggle-checkbox");
+  const darkModeSaved = localStorage.getItem("darkMode") === "on";
+  if (darkModeSaved) {
+    document.body.classList.add("dark-theme");
+    if (themeCheckbox) themeCheckbox.checked = true;
+  }
+
+  // Dark mode toggle listener
+  themeCheckbox?.addEventListener("change", (e) => {
+    const isDark = e.target.checked;
+    document.body.classList.toggle("dark-theme", isDark);
+    localStorage.setItem("darkMode", isDark ? "on" : "off");
+  });
+}
+
+// Sidebar toggle logic
+function setupSidebarToggle() {
+  const hideSidebarBtn = document.getElementById("hide-sidebar-btn");
+  const sideBar = document.getElementById("side-bar-div");
+  const showSidebarBtn = document.getElementById("show-sidebar-btn");
+
+  hideSidebarBtn?.addEventListener("click", () => {
+    sideBar.style.display = "none";
+    showSidebarBtn.style.display = "block";
+  });
+
+  showSidebarBtn?.addEventListener("click", () => {
+    sideBar.style.display = "flex";
+    showSidebarBtn.style.display = "none";
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
+  setupSidebarToggle();
 });
 
-// Dark Mode Toggle
-const themeCheckbox = document.getElementById("theme-toggle-checkbox");
-themeCheckbox?.addEventListener("change", (e) => {
-  document.body.classList.toggle("dark-mode", e.target.checked);
-});
-
-// Hide Sidebar Button
-const hideSidebarBtn = document.getElementById("hide-sidebar-btn");
-const sideBar = document.getElementById("side-bar-div");
-const showSidebarBtn = document.getElementById("show-sidebar-btn");
-
-hideSidebarBtn?.addEventListener("click", () => {
-  sideBar.style.display = "none";
-  showSidebarBtn.style.display = "block";
-});
-
-showSidebarBtn?.addEventListener("click", () => {
-  sideBar.style.display = "flex";
-  showSidebarBtn.style.display = "none";
-});
