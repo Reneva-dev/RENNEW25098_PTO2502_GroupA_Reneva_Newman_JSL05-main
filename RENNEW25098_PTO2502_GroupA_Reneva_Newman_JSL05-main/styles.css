@@ -725,6 +725,18 @@ dialog#task-modal {
   transform: translateX(100%);
 }
 
+/* Default logo (light mode) */
+#logo {
+  width: 120px; /* adjust as needed */
+  height: auto;
+}
+
+/* Dark mode logo */
+.dark-theme #logo {
+  content: url('./assets/logo-dark.svg'); /* dark-mode SVG with transparent background */
+}
+
+
 /* ----------------------
    Task Priority Dots
 ---------------------- */
