@@ -132,16 +132,16 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 48px;
-  background-color: var(--secondary-color); /* #F4F7FD light bg */
+  justify-content: center; /* center all items instead of space-between */
+  width: auto;             /* shrink container to fit content */
+  height: 36px;            /* optional smaller height */
+  background-color: var(--secondary-color);
   border-radius: 4px;
-  padding: 0 12px;
+  padding: 0 8px;          /* smaller horizontal padding */
   cursor: pointer;
   user-select: none;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  gap: 4px;
+  gap: 4px;                /* space between icons and slider */
 }
 
 /* Sun and Moon icons styling */
