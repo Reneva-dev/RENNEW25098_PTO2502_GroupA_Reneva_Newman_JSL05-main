@@ -52,7 +52,7 @@ body {
 .theme-hide-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
   width: 90%;
   margin: 0 auto;
   flex-shrink: 0;
