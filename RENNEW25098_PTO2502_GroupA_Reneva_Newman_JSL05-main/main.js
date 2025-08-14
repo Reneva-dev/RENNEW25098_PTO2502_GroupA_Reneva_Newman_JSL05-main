@@ -45,11 +45,22 @@ async function init() {
 document.addEventListener("DOMContentLoaded", () => {
   init();
 
-  // Sidebar toggle functionality (desktop hide/show buttons)
   const sidebar = document.getElementById("side-bar-div");
   const hideBtn = document.getElementById("hide-sidebar-btn");
   const showBtn = document.getElementById("show-sidebar-btn");
+  const logo = document.getElementById("logo");
+  const mobileLogo = document.getElementById("mobile-logo-toggle");
 
+  // Desktop sidebar toggle on logo click
+  if (logo && sidebar) {
+    logo.addEventListener("click", () => {
+      if (window.innerWidth > 768) {
+        sidebar.classList.toggle("mini"); // collapse/expand sidebar on desktop
+      }
+    });
+  }
+
+  // Sidebar toggle functionality (desktop hide/show buttons)
   if (hideBtn && showBtn && sidebar) {
     hideBtn.addEventListener("click", () => {
       sidebar.style.display = "none";
@@ -62,40 +73,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Mobile sidebar toggle on app logo click
-  const mobileLogo = document.getElementById("mobile-logo-toggle");
+  // Mobile sidebar toggle on logo click
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
       if (window.innerWidth <= 768) {
-        sidebar.classList.toggle("mobile-active");
+        sidebar.classList.toggle("mobile-active"); // show/hide sidebar on mobile
       }
     });
   }
 
   // DARK MODE FUNCTIONALITY
-const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
+  const themeToggleCheckbox = document.getElementById("theme-toggle-checkbox");
 
-function applyTheme(theme) {
-  if (theme === "dark") {
-    document.body.classList.add("dark-theme");
-    themeToggleCheckbox.checked = true;
-  } else {
-    document.body.classList.remove("dark-theme");
-    themeToggleCheckbox.checked = false;
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark-theme");
+      themeToggleCheckbox.checked = true;
+    } else {
+      document.body.classList.remove("dark-theme");
+      themeToggleCheckbox.checked = false;
+    }
+    localStorage.setItem("theme", theme);
   }
-  localStorage.setItem("theme", theme);
-}
 
-if (themeToggleCheckbox) {
-  // Apply saved theme immediately
-  const savedTheme = localStorage.getItem("theme") || "light";
-  applyTheme(savedTheme);
+  if (themeToggleCheckbox) {
+    // Apply saved theme immediately
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
 
-  // Toggle event listener
-  themeToggleCheckbox.addEventListener("change", () => {
-    applyTheme(themeToggleCheckbox.checked ? "dark" : "light");
-  });
-} else {
-  console.warn("Theme toggle checkbox not found");
-}
-})
+    // Toggle event listener
+    themeToggleCheckbox.addEventListener("change", () => {
+      applyTheme(themeToggleCheckbox.checked ? "dark" : "light");
+    });
+  } else {
+    console.warn("Theme toggle checkbox not found");
+  }
+});

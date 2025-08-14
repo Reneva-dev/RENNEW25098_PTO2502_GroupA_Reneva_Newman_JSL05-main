@@ -199,17 +199,41 @@ body {
 ================= */
 
 /* Side Logo */
+/* Side Logo Container */
 #side-logo-div {
-  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  margin: 33px 34px 54px 34px; /* Adjusted spacing */
   display: flex;
   justify-content: flex-start;
-  width: 150px;
 }
 
-#logo {
-  width: 120px;
-  height: auto; 
+/* Side Logo Container */
+#side-logo-div {
+  margin: 33px 34px 54px 34px; /* spacing around logo */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; /* vertically center logo */
 }
+
+/* Sidebar Logo */
+#logo {
+  width: 120px;        /* fixed width */
+  max-width: 100%;     /* responsive scaling */
+  height: auto;        /* maintain aspect ratio */
+  display: block;      /* remove inline spacing */
+  cursor: pointer;     /* indicate clickable */
+}
+
+/* Mini Sidebar - hidden by default */
+#side-bar-div.mini {
+  width: 60px;          /* collapsed sidebar width */
+}
+
+#side-bar-div.mini .sidebar-top-group {
+  /* optional: hide text labels when mini */
+  overflow: hidden;
+}
+
+
 
 /* Boards navigation */
 .boards-nav-links-div {
