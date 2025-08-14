@@ -200,13 +200,15 @@ body {
 
 /* Side Logo */
 #side-logo-div {
-  margin: 33px 113px 54px 34px; /* Spacing around logo */
+  margin: 33px 0px 54px 34px; /* Spacing around logo */
   display: flex;
   justify-content: flex-start;
+  width: 150px;
 }
 
 #logo {
-  width: 200%; /* Make logo responsive within container */
+  width: 120px;
+  height: auto; 
 }
 
 /* Boards navigation */
