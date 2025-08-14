@@ -63,6 +63,41 @@ body {
   overflow: hidden; 
 }
 
+/* Fullscreen Mini Sidebar for Mobile */
+#side-bar-div.mobile-active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff; /* or your sidebar color */
+  z-index: 9999; /* on top of content */
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+/* Close button inside fullscreen mini */
+#side-bar-div.mobile-active .close-mini-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Optional: dim the background behind the sidebar */
+#side-bar-div.mobile-active::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.3);
+  z-index: -1;
+}
+
+
 /* ------------------------- */
 /* MOBILE FULL-SCREEN OVERLAY */
 /* ------------------------- */
