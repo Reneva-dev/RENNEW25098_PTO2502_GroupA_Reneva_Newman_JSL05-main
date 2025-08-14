@@ -33,28 +33,38 @@ function hideLoadingState() {
  * Initialize the Kanban board with data from API or localStorage.
  */
 async function init() {
-  showLoadingState();
+  const spinner = document.getElementById("loading-spinner");
+  const statusEl = document.getElementById("status-message");
 
-  let tasks = loadTasks(); // Try local storage first
+  // Show spinner and loading message
+  spinner.style.display = "flex";
+  statusEl.textContent = "Loading tasks...";
+  statusEl.style.display = "block";
+
+  let tasks = loadTasks();
 
   if (!tasks || tasks.length === 0) {
     try {
-      tasks = await fetchTasksFromAPI();
+      tasks = await fetchTasksFromAPI(); // Spinner is visible during this fetch
       saveTasks(tasks);
     } catch (error) {
-      console.error(error);
-      setStatusMessage("Error fetching tasks. Please try again.");
+      statusEl.textContent = "Error fetching tasks.";
+      spinner.style.display = "none";
       return;
     }
   }
 
-  hideLoadingState();
+  // Hide spinner and clear message once tasks are ready
+  spinner.style.display = "none";
+  statusEl.textContent = "";
+  statusEl.style.display = "none";
+
   clearExistingTasks();
   renderTasks(tasks);
-
   setupModalCloseHandler();
   setupAddTaskModal();
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   init();
