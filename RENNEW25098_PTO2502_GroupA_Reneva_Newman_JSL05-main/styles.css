@@ -146,7 +146,7 @@ body {
 /* Sun and Moon icons styling */
 .theme-switch .sun,
 .theme-switch .moon {
-  font-size: 1.25rem;
+  font-size: 1rem;
   flex-shrink: 0;
 }
 
@@ -161,7 +161,7 @@ body {
 /* The slider track */
 .theme-switch .slider {
   position: relative;
-  flex-grow: 1;
+  flex-grow: 0;
   height: 24px;
   background-color: #635FC7; /* default light mode bg */
   border-radius: 12px;
