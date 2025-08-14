@@ -162,11 +162,12 @@ body {
 .theme-switch .slider {
   position: relative;
   flex-grow: 0;
-  height: 24px;
+  height: 20px;
   background-color: #635FC7; /* default light mode bg */
   border-radius: 12px;
-  margin: 0 10px;
+  margin: 0 5px;
   transition: background-color 0.3s ease;
+  width: 40px;          /* smaller slider width */
 }
 
 /* The circle knob */
