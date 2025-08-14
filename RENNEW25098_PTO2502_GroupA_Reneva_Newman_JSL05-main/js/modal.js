@@ -22,7 +22,7 @@ export function openTaskModal(task) {
   descInput.value = task.description;
   statusSelect.value = task.status;
   prioritySelect.value = task.priority || "low";
-  if (submitBtn) submitBtn.textContent = "Update Task";
+  if (submitBtn) submitBtn.textContent = "Save changes";
 
   currentTaskId = task.id;
 
