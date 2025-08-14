@@ -206,7 +206,7 @@ body {
 }
 
 #logo {
-  width: 100%; /* Make logo responsive within container */
+  width: 200%; /* Make logo responsive within container */
 }
 
 /* Boards navigation */
