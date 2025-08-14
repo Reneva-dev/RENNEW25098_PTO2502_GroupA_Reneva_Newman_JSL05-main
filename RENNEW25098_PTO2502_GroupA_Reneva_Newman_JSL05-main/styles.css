@@ -673,6 +673,23 @@ dialog#task-modal {
   --dot-todo: #49c4e5;
   --dot-doing: #8471f2;
   --dot-done: #67e2ae;
+  --input-bg: #ffffff;       /* White inputs in dark mode */
+  --input-text-color: #808191; /* Grey text for input */
+  --task-activity-bg: #3e3f4e; /* Task activity background in dark mode */
+}
+
+/* Placeholder color in dark mode */
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+  color: #808191; /* grey text */
+  opacity: 1; /* ensure full visibility */
+}
+
+/* Task activity cards in dark mode */
+.dark-theme .task-activity,
+.dark-theme .tasks-container .task-card {
+  background-color: var(--task-activity-bg);
+  color: var(--text-color);
 }
 
 /* Dark theme general body */
