@@ -1,5 +1,4 @@
 // modal.js
-
 import { loadTasks, saveTasks, deleteTask } from "./storage.js";
 import { clearExistingTasks, renderTasks } from "./render.js";
 
@@ -11,6 +10,7 @@ let currentTaskId = null;
  */
 export function openTaskModal(task) {
   const modal = document.getElementById("task-modal");
+  const modalHeader = document.getElementById("modal-header-title");
   const titleInput = document.getElementById("task-title");
   const descInput = document.getElementById("task-desc");
   const statusSelect = document.getElementById("task-status");
@@ -22,11 +22,13 @@ export function openTaskModal(task) {
   descInput.value = task.description;
   statusSelect.value = task.status;
   prioritySelect.value = task.priority || "low";
+
   if (submitBtn) submitBtn.textContent = "Save changes";
+  if (modalHeader) modalHeader.textContent = "Update Task"; // Header text updated
 
   currentTaskId = task.id;
 
-  // Show the delete button for editing tasks
+  // Show delete button when editing
   if (deleteBtn) deleteBtn.style.display = "block";
 
   modal.showModal();
@@ -42,24 +44,23 @@ export function setupModalCloseHandler() {
 }
 
 /**
- * Set up modal and form submission logic.
+ * Set up modal and form submission logic for adding a new task.
  */
 export function setupAddTaskModal() {
   const addTaskBtn = document.getElementById("add-task-btn");
   const taskForm = document.getElementById("task-form");
   const deleteBtn = document.getElementById("delete-task-btn");
   const modal = document.getElementById("task-modal");
+  const modalHeader = document.getElementById("modal-header-title");
   const prioritySelect = document.getElementById("task-priority");
 
-  // --- Load saved priority on page load ---
+  // Load saved priority on page load
   window.addEventListener("DOMContentLoaded", () => {
     const savedPriority = localStorage.getItem("taskPriority");
-    if (savedPriority) {
-      prioritySelect.value = savedPriority;
-    }
+    if (savedPriority) prioritySelect.value = savedPriority;
   });
 
-  // --- Save priority whenever it changes ---
+  // Save priority whenever it changes
   prioritySelect.addEventListener("change", () => {
     localStorage.setItem("taskPriority", prioritySelect.value);
   });
@@ -72,15 +73,13 @@ export function setupAddTaskModal() {
     document.getElementById("task-title").value = "";
     document.getElementById("task-desc").value = "";
     document.getElementById("task-status").value = "todo";
-
-    // Load last saved priority when opening the modal
     const savedPriority = localStorage.getItem("taskPriority");
     prioritySelect.value = savedPriority || "low";
 
     const submitBtn = document.getElementById("submit-task-btn");
     if (submitBtn) submitBtn.textContent = "Create Task";
+    if (modalHeader) modalHeader.textContent = "Create New Task"; // Header text updated
 
-    // Hide delete button when adding a new task
     if (deleteBtn) deleteBtn.style.display = "none";
 
     modal.showModal();
@@ -102,40 +101,41 @@ export function setupAddTaskModal() {
   });
 
   // Submit form (create or update task)
- taskForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+  taskForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  const title = document.getElementById("task-title").value.trim();
-  const description = document.getElementById("task-desc").value.trim();
-  const status = document.getElementById("task-status").value;
-  const priority = document.getElementById("task-priority").value;
+    const title = document.getElementById("task-title").value.trim();
+    const description = document.getElementById("task-desc").value.trim();
+    const status = document.getElementById("task-status").value;
+    const priority = document.getElementById("task-priority").value;
 
-  if (!title || !status) return; // simple validation
+    if (!title || !status) return;
 
-  const tasks = loadTasks();
+    const tasks = loadTasks();
 
-  if (currentTaskId !== null) {
-    // Update existing task
-    const taskIndex = tasks.findIndex((t) => t.id === currentTaskId);
-    if (taskIndex !== -1) {
-      tasks[taskIndex] = { ...tasks[taskIndex], title, description, status, priority };
+    if (currentTaskId !== null) {
+      // Update existing task
+      const taskIndex = tasks.findIndex((t) => t.id === currentTaskId);
+      if (taskIndex !== -1) {
+        tasks[taskIndex] = { ...tasks[taskIndex], title, description, status, priority };
+      }
+    } else {
+      // Create new task
+      const newTask = {
+        id: Date.now(),
+        title,
+        description,
+        status,
+        priority,
+      };
+      tasks.push(newTask);
     }
-  } else {
-    // Create new task
-    const newTask = {
-      id: Date.now(),
-      title,
-      description,
-      status,
-      priority,
-    };
-    tasks.push(newTask);
-  }
 
-  saveTasks(tasks);
-  clearExistingTasks();
-  renderTasks(loadTasks());
-  modal.close();
-  currentTaskId = null;
-});
+    saveTasks(tasks);
+    clearExistingTasks();
+    renderTasks(loadTasks());
+    modal.close();
+    currentTaskId = null;
+  });
 }
+

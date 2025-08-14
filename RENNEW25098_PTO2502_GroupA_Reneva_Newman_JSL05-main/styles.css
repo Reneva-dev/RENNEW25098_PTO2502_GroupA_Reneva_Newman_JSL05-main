@@ -777,6 +777,39 @@ dialog#task-modal {
   content: url('./assets/logo-light.svg'); 
 }
 
+.dark-theme #task-modal {
+  background-color: #3e3f4e !important;
+  color: #ffffff; /* white text for readability */
+}
+
+/* Make sure inputs inside the modal stay white */
+.dark-theme #task-modal input,
+.dark-theme #task-modal textarea,
+.dark-theme #task-modal select {
+  background-color: #ffffff !important;
+  color: #808191 !important; /* grey text */
+}
+
+.dark-theme #task-modal input::placeholder,
+.dark-theme #task-modal textarea::placeholder {
+  color: #808191 !important; /* grey placeholder */
+}
+
+/* Dark mode modal header text */
+.dark-theme #task-modal .modal-header h3 {
+  color: #ffffff !important;
+}
+
+/* Dark mode modal close button */
+.dark-theme #task-modal .modal-header .close-btn {
+  color: #ff4d4d !important; /* bright red */
+  background: none; /* remove any background */
+  border: none; /* remove border */
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
 /* ----------------------
    Task Priority Dots
 ---------------------- */
