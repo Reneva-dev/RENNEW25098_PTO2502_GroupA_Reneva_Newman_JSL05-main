@@ -79,9 +79,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (theme === "dark") {
       document.body.classList.add("dark-theme");
       themeToggleCheckbox.checked = true;
+      if (logo) logo.src = './assets/logo-dark.svg';
     } else {
       document.body.classList.remove("dark-theme");
       themeToggleCheckbox.checked = false;
+      if (logo) logo.src = './assets/logo-light.svg';
     }
     localStorage.setItem("theme", theme);
   }
