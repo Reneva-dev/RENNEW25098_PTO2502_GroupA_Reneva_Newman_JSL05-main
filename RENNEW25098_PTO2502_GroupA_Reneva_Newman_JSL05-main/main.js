@@ -55,3 +55,23 @@ document.addEventListener("DOMContentLoaded", () => {
   init();
 });
 
+// Dark Mode Toggle
+const themeCheckbox = document.getElementById("theme-toggle-checkbox");
+themeCheckbox?.addEventListener("change", (e) => {
+  document.body.classList.toggle("dark-mode", e.target.checked);
+});
+
+// Hide Sidebar Button
+const hideSidebarBtn = document.getElementById("hide-sidebar-btn");
+const sideBar = document.getElementById("side-bar-div");
+const showSidebarBtn = document.getElementById("show-sidebar-btn");
+
+hideSidebarBtn?.addEventListener("click", () => {
+  sideBar.style.display = "none";
+  showSidebarBtn.style.display = "block";
+});
+
+showSidebarBtn?.addEventListener("click", () => {
+  sideBar.style.display = "flex";
+  showSidebarBtn.style.display = "none";
+});
