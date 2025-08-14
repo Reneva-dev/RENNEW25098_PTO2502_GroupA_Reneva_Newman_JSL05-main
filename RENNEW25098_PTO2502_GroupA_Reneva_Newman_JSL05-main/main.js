@@ -16,28 +16,42 @@ function setStatusMessage(message) {
 }
 
 /**
- * Initialize the Kanban board with data.
+ * Show a loading spinner or text while fetching tasks.
+ */
+function showLoadingState() {
+  setStatusMessage("Loading tasks...");
+}
+
+/**
+ * Hide loading state once tasks are ready.
+ */
+function hideLoadingState() {
+  setStatusMessage("");
+}
+
+/**
+ * Initialize the Kanban board with data from API or localStorage.
  */
 async function init() {
-  setStatusMessage("Loading tasks...");
+  showLoadingState();
 
-  let tasks = loadTasks();
+  let tasks = loadTasks(); // Try local storage first
 
   if (!tasks || tasks.length === 0) {
     try {
       tasks = await fetchTasksFromAPI();
       saveTasks(tasks);
-      setStatusMessage("");
     } catch (error) {
-      setStatusMessage("Error fetching tasks.");
+      console.error(error);
+      setStatusMessage("Error fetching tasks. Please try again.");
       return;
     }
-  } else {
-    setStatusMessage("");
   }
 
+  hideLoadingState();
   clearExistingTasks();
   renderTasks(tasks);
+
   setupModalCloseHandler();
   setupAddTaskModal();
 }
@@ -45,7 +59,7 @@ async function init() {
 document.addEventListener("DOMContentLoaded", () => {
   init();
 
-  // Sidebar toggle functionality (desktop hide/show buttons)
+  // Sidebar toggle functionality
   const sidebar = document.getElementById("side-bar-div");
   const hideBtn = document.getElementById("hide-sidebar-btn");
   const showBtn = document.getElementById("show-sidebar-btn");
@@ -55,14 +69,13 @@ document.addEventListener("DOMContentLoaded", () => {
       sidebar.style.display = "none";
       showBtn.style.display = "block";
     });
-
     showBtn.addEventListener("click", () => {
       sidebar.style.display = "flex";
       showBtn.style.display = "none";
     });
   }
 
-  // Mobile sidebar toggle on app logo click
+  // Mobile sidebar toggle on logo click
   const mobileLogo = document.getElementById("mobile-logo-toggle");
   if (mobileLogo && sidebar) {
     mobileLogo.addEventListener("click", () => {
@@ -87,11 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (themeToggleCheckbox) {
-    // Apply saved theme immediately
     const savedTheme = localStorage.getItem("theme") || "light";
     applyTheme(savedTheme);
 
-    // Toggle event listener
     themeToggleCheckbox.addEventListener("change", () => {
       applyTheme(themeToggleCheckbox.checked ? "dark" : "light");
     });
