@@ -744,3 +744,26 @@ dialog#task-modal {
   border-radius: 50%;
   flex-shrink: 0;
 }
+
+/* Mobile: make button only show a + in a circle */
+@media (max-width: 600px) {
+  #add-task-btn {
+    width: 48px;                /* fixed size */
+    height: 48px;
+    padding: 0;                  /* remove large padding */
+    border-radius: 50%;          /* perfect circle */
+    font-size: 24px;             /* bigger plus sign */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Replace full text with just a plus sign */
+  #add-task-btn span {
+    display: none; /* hide original "+ Add New Task" text */
+  }
+  
+  #add-task-btn::before {
+    content: "+";  /* insert just the plus */
+  }
+}
