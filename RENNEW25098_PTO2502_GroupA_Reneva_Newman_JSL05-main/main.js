@@ -14,7 +14,7 @@ function setStatusMessage(message) {
 }
 
 async function init() {
-  const spinner = document.getElementById("loading-spinner");
+  const spinner = document.getElementById("loading-overlay");
   const statusEl = document.getElementById("status-message");
 
   // Show spinner and loading message
