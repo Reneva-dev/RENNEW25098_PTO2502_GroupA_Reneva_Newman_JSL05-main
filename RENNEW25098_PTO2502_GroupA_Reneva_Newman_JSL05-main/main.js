@@ -1,3 +1,4 @@
+// main.js
 import { loadTasks, saveTasks } from './js/storage.js';
 import { setupModalCloseHandler, setupAddTaskModal } from './js/modal.js';
 import { renderTasks, clearExistingTasks } from './js/render.js';
@@ -10,10 +11,11 @@ function setStatusMessage(message) {
   const statusEl = document.getElementById("status-message");
   if (statusEl) {
     statusEl.textContent = message;
+  }
 }
+
 async function init() {
   const overlay = document.getElementById("loading-overlay");
-  const statusEl = document.getElementById("status-message");
 
   // Show overlay and loading message
   if (overlay) overlay.style.display = "flex"; 
@@ -67,23 +69,6 @@ async function init() {
   });
 }
 
-
-  // Initialize dark mode from localStorage
-  const themeCheckbox = document.getElementById("theme-toggle-checkbox");
-  const darkModeSaved = localStorage.getItem("darkMode") === "on";
-  if (darkModeSaved) {
-    document.body.classList.add("dark-theme");
-    if (themeCheckbox) themeCheckbox.checked = true;
-  }
-
-  // Dark mode toggle listener
-  themeCheckbox?.addEventListener("change", (e) => {
-    const isDark = e.target.checked;
-    document.body.classList.toggle("dark-theme", isDark);
-    localStorage.setItem("darkMode", isDark ? "on" : "off");
-  });
-}
-
 // Sidebar toggle logic
 function setupSidebarToggle() {
   const hideSidebarBtn = document.getElementById("hide-sidebar-btn");
@@ -91,13 +76,13 @@ function setupSidebarToggle() {
   const showSidebarBtn = document.getElementById("show-sidebar-btn");
 
   hideSidebarBtn?.addEventListener("click", () => {
-    sideBar.style.display = "none";
-    showSidebarBtn.style.display = "block";
+    if (sideBar) sideBar.style.display = "none";
+    if (showSidebarBtn) showSidebarBtn.style.display = "block";
   });
 
   showSidebarBtn?.addEventListener("click", () => {
-    sideBar.style.display = "flex";
-    showSidebarBtn.style.display = "none";
+    if (sideBar) sideBar.style.display = "flex";
+    if (showSidebarBtn) showSidebarBtn.style.display = "none";
   });
 }
 
@@ -105,4 +90,3 @@ document.addEventListener("DOMContentLoaded", () => {
   init();
   setupSidebarToggle();
 });
-
