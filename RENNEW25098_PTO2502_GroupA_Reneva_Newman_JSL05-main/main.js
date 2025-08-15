@@ -10,15 +10,13 @@ function setStatusMessage(message) {
   const statusEl = document.getElementById("status-message");
   if (statusEl) {
     statusEl.textContent = message;
-  }
 }
-
 async function init() {
-  const spinner = document.getElementById("loading-overlay");
+  const overlay = document.getElementById("loading-overlay");
   const statusEl = document.getElementById("status-message");
 
-  // Show spinner and loading message
-  if (spinner) spinner.style.display = "flex"; // Use "flex" for your CSS spinner
+  // Show overlay and loading message
+  if (overlay) overlay.style.display = "flex"; 
   setStatusMessage("Loading tasks...");
 
   let tasks = loadTasks();
@@ -30,25 +28,45 @@ async function init() {
     }
   } catch (error) {
     console.error("Error fetching tasks:", error);
-    // Use fallback test tasks so content renders
+
+    // Fallback tasks if API fails
     tasks = [
       { id: 1, title: "Test Task 1", status: "todo", priority: "medium" },
       { id: 2, title: "Test Task 2", status: "doing", priority: "high" },
       { id: 3, title: "Test Task 3", status: "done", priority: "low" }
     ];
+
     setStatusMessage("Failed to fetch tasks; showing fallback tasks.");
   }
 
-  // Hide spinner/message after short delay for UX
+  // Hide overlay and clear status message after a short delay
   setTimeout(() => {
-    if (spinner) spinner.style.display = "none";
+    if (overlay) overlay.style.display = "none";
     setStatusMessage("");
-  }, 300); // optional short delay for smoother transition
+  }, 300);
 
+  // Render tasks and setup modals
   clearExistingTasks();
   renderTasks(tasks);
   setupModalCloseHandler();
   setupAddTaskModal();
+
+  // Initialize dark mode from localStorage
+  const themeCheckbox = document.getElementById("theme-toggle-checkbox");
+  const darkModeSaved = localStorage.getItem("darkMode") === "on";
+  if (darkModeSaved) {
+    document.body.classList.add("dark-theme");
+    if (themeCheckbox) themeCheckbox.checked = true;
+  }
+
+  // Dark mode toggle listener
+  themeCheckbox?.addEventListener("change", (e) => {
+    const isDark = e.target.checked;
+    document.body.classList.toggle("dark-theme", isDark);
+    localStorage.setItem("darkMode", isDark ? "on" : "off");
+  });
+}
+
 
   // Initialize dark mode from localStorage
   const themeCheckbox = document.getElementById("theme-toggle-checkbox");
