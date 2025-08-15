@@ -4,7 +4,9 @@
 
 🎥 Presentation Video
 
-You can watch the project presentation here.
+You can watch the project presentation by clicking the link: 
+https://drive.google.com/file/d/1xpgMbYpQYEZ-cPHLJYWFGtvvWlktoNn2/view?usp=drive_link
+
 
 A dynamic and responsive web-based task management tool inspired by the Kanban methodology. This project allows users to visually organize their tasks across three progress states: **To Do**, **Doing**, and **Done** — enabling a clear overview of productivity in real-time.
 
