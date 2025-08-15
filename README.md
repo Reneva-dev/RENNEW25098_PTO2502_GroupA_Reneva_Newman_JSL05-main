@@ -2,6 +2,10 @@
 
 🚀 **Live App:** [https://my-kanban-app.netlify.app](https://my-kanban-app.netlify.app)
 
+🎥 Presentation Video
+
+You can watch the project presentation here.
+
 A dynamic and responsive web-based task management tool inspired by the Kanban methodology. This project allows users to visually organize their tasks across three progress states: **To Do**, **Doing**, and **Done** — enabling a clear overview of productivity in real-time.
 
 ---
